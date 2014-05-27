@@ -1,12 +1,13 @@
 package dao;
 
+import dao.core.UsuarioDAO;
 import dao.jpa.JPADAOFactory;
 
 /**
  *
  * @author Felipe
  */
-public class DAOFactory {
+public abstract class DAOFactory {
 
     public static final Byte JPA = 1;
 
@@ -16,4 +17,6 @@ public class DAOFactory {
         }
         return null;
     }
+    
+    public abstract UsuarioDAO getUsuarioDAO();
 }

@@ -15,4 +15,6 @@ public interface DefaultDAO<T> {
     List<T> listAll();
 
     T find(Integer id);
+    
+    void remove(Integer id);
 }
