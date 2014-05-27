@@ -1,10 +1,12 @@
 package model;
 
+import java.io.Serializable;
+
 /**
  *
  * @author Felipe
  */
-public class Endereco {
+public class Endereco implements Serializable {
 
     private String pais;
     private String uf;

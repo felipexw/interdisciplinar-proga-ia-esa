@@ -11,12 +11,12 @@ public abstract class DAOFactory {
 
     public static final Byte JPA = 1;
 
-    public DAOFactory getDAOFactory(byte optionFactory) {
+    public static DAOFactory getDAOFactory(byte optionFactory) {
         if (optionFactory == JPA) {
             return new JPADAOFactory();
         }
         return null;
     }
-    
+
     public abstract UsuarioDAO getUsuarioDAO();
 }

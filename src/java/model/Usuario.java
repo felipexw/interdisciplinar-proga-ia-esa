@@ -1,7 +1,7 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
-import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -17,7 +17,7 @@ import javax.persistence.TemporalType;
  */
 @Entity
 @NamedQuery(name = "usuario.login", query = "select u from Usuario u WHERE u.email = :email AND u.senha = :senha")
-public class Usuario {
+public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gerador_sequencia")
@@ -31,8 +31,18 @@ public class Usuario {
     private Date dataNascimento;
     private String senha;
     private char sexo;
-    @Embedded
     private Endereco endereco;
+
+    public Usuario(String nome, String email, char tipo, String cpf, Date dataNascimento, String senha, char sexo, Endereco endereco) {
+        this.nome = nome;
+        this.email = email;
+        this.tipo = tipo;
+        this.cpf = cpf;
+        this.dataNascimento = dataNascimento;
+        this.senha = senha;
+        this.sexo = sexo;
+        this.endereco = endereco;
+    }
 
     public Endereco getEndereco() {
         return endereco;
