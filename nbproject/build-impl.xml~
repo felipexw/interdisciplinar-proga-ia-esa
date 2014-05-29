@@ -41,8 +41,8 @@
         <property file="${user.properties.file}"/>
         <!-- The two properties below are usually overridden -->
         <!-- by the active platform. Just a fallback. -->
-        <property name="default.javac.source" value="1.4"/>
-        <property name="default.javac.target" value="1.4"/>
+        <property name="default.javac.source" value="1.7"/>
+        <property name="default.javac.target" value="1.7"/>
     </target>
     <target depends="-pre-init,-init-private,-init-user" name="-init-project">
         <property file="nbproject/project.properties"/>
@@ -1005,10 +1005,9 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.jstl-impl.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.org.eclipse.persistence.jpa.jpql_2.5.1.v20130918-f2b9fc5.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.org.eclipse.persistence.jpa.modelgen_2.5.1.v20130918-f2b9fc5.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
+        <copyfiles files="${file.reference.primefaces-4.0.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${libs.eclipselink.classpath}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <copyfiles files="${file.reference.postgresql-9.1-901-1.jdbc4.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.hot-sneaks-1.0.10.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
-        <copyfiles files="${file.reference.primefaces-4.0.jar}" iftldtodir="${build.web.dir}/WEB-INF" todir="${dist.ear.dir}/lib"/>
         <mkdir dir="${build.web.dir}/META-INF"/>
         <manifest file="${build.web.dir}/META-INF/MANIFEST.MF" mode="update"/>
     </target>
@@ -1021,10 +1020,9 @@ exists or setup the property manually. For example like this:
         <copyfiles files="${file.reference.jstl-impl.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.org.eclipse.persistence.jpa.jpql_2.5.1.v20130918-f2b9fc5.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.org.eclipse.persistence.jpa.modelgen_2.5.1.v20130918-f2b9fc5.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
+        <copyfiles files="${file.reference.primefaces-4.0.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${libs.eclipselink.classpath}" todir="${build.web.dir}/WEB-INF/lib"/>
         <copyfiles files="${file.reference.postgresql-9.1-901-1.jdbc4.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.hot-sneaks-1.0.10.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
-        <copyfiles files="${file.reference.primefaces-4.0.jar}" todir="${build.web.dir}/WEB-INF/lib"/>
     </target>
     <target depends="init" if="dist.ear.dir" name="-clean-webinf-lib">
         <delete dir="${build.web.dir}/WEB-INF/lib"/>
