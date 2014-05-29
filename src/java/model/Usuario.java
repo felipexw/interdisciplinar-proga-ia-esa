@@ -15,13 +15,13 @@ import javax.persistence.TemporalType;
  *
  * @author Felipe
  */
-@Entity
 @NamedQuery(name = "usuario.login", query = "select u from Usuario u WHERE u.email = :email AND u.senha = :senha")
+@Entity
 public class Usuario implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "gerador_sequencia")
-    @SequenceGenerator(name = "gerador_sequencia", sequenceName = "sequencia_inter", schema = "inter", initialValue = 1)
+    @SequenceGenerator(name = "gerador_sequencia", sequenceName = "sequencia_inter", initialValue = 1)
     private Integer id;
     private String nome;
     private String email;
@@ -31,9 +31,8 @@ public class Usuario implements Serializable {
     private Date dataNascimento;
     private String senha;
     private char sexo;
-    private Endereco endereco;
 
-    public Usuario(String nome, String email, char tipo, String cpf, Date dataNascimento, String senha, char sexo, Endereco endereco) {
+    public Usuario(String nome, String email, char tipo, String cpf, Date dataNascimento, String senha, char sexo) {
         this.nome = nome;
         this.email = email;
         this.tipo = tipo;
@@ -41,15 +40,9 @@ public class Usuario implements Serializable {
         this.dataNascimento = dataNascimento;
         this.senha = senha;
         this.sexo = sexo;
-        this.endereco = endereco;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public Usuario() {
     }
 
     public Integer getId() {

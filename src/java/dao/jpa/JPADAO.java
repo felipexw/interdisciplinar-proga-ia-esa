@@ -7,6 +7,7 @@ import javax.persistence.EntityManager;
 /**
  *
  * @author Felipe
+ * @param <T>
  */
 public abstract class JPADAO<T extends Object> extends JPADAOFactory implements DefaultDAO<T> {
 
