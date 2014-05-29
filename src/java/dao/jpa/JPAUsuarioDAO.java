@@ -1,6 +1,8 @@
 package dao.jpa;
 
 import dao.core.UsuarioDAO;
+import java.util.HashMap;
+import java.util.Map;
 import model.Usuario;
 
 /**
@@ -11,7 +13,10 @@ public class JPAUsuarioDAO extends JPADAO<Usuario> implements UsuarioDAO {
 
     @Override
     public Usuario login(String email, String senha) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Map<String, Object> params = new HashMap<>();
+        params.put("email", email);
+        params.put("senha", senha);
+        return (Usuario) getJPAUtil().consultaNomeada("usuario.login", params);
     }
 
     @Override

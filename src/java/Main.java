@@ -1,6 +1,8 @@
 
 import dao.DAOFactory;
 import java.util.Date;
+import model.Sexo;
+import model.TipoUsuario;
 import model.Usuario;
 
 /**
@@ -8,9 +10,13 @@ import model.Usuario;
  * @author Felipe
  */
 public class Main {
-
+    
     public static void main(String[] args) {
-        DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO()
-                .insert(new Usuario("Felipe Appio", "felipexw@gmail.com", 'a', "060.116.339-78", new Date(), "teste", 'M'));
+        Usuario user = new Usuario("Felipe Appio", "felipexw@gmail.com", "060.-72",
+                new Date(), "teste", TipoUsuario.NORMAL, Sexo.MASCULINO);
+        user.setId(1);
+//        DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().insert(user);
+        DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().update(user);
+//        System.out.println(DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().login("felipexw@gmail.com", "12"));
     }
 }
