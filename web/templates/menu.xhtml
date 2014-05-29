@@ -10,7 +10,7 @@
                             url="#"/>
             </p:submenu>
             
-            <p:submenu label="Nome do Usuário"
+            <p:submenu label="#{loginBean.usuarioSessao.nome}"
                        icon="ui-icon-person"
                        style="float: right">
                 <p:menuitem value="Sair" 
@@ -27,7 +27,7 @@
             <p:outputLabel value="Você tem certeza que deseja sair?"/>
             <f:facet name="footer"> 
                 <p:commandButton value="Sim"
-                                 action="#{menuBean.logout()}"
+                                 action="#{loginBean.logout()}"
                                  type="button"
                                  ajax="false"/>                
                 <p:commandButton value="Não" 

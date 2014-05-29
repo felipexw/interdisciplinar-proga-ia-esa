@@ -6,33 +6,35 @@
 
     <ui:define name="corpo">
         <p:dialog widgetVar="dlgLogin" 
-                  header="#{msg.Login_do_QIAdmin}"
+                  header="Login"
                   resizable="false" 
                   closable="false"
                   minimizable="false"
                   draggable="false"
                   modal="true"
-                  id="caixalogin">
+                  id="caixalogin"
+                  rendered="#{loginBean.usuarioSessao eq null}"
+                  visible="#{loginBean.usuarioSessao eq null}">
 
             <h:form id="frmLogin">
                 <h:panelGrid columns="2" id="panelLoginUser">
                     <h:outputText value="E-mail: " escape="false"/>
                     <p:inputText id="email" 
                                  required="true"
-                                 value="" 
+                                 value="#{loginBean.usuario.email}" 
                                  size="30"/>
 
                     <h:outputText value="Senha: "/>
                     <p:password id="senha" 
                                 required="true"
-                                value="" 
+                                value="#{loginBean.usuario.senha}" 
                                 size="30"
                                 feedback="false"/>
                 </h:panelGrid>
                 <h:panelGrid columns="2" id="panelLoginActions">
 
 
-                    <p:commandButton value="Entrar no Sistema"
+                    <p:commandButton value="Conectar"
                                      style="margin-left: 20px;"
                                      ajax="true"
                                      actionListener="#{loginBean.login()}"
