@@ -29,19 +29,22 @@
                     <p:inputText value="#{usuarioBean.usuario.nome}"
                                  size="30"
                                  required="true"
-                                 requiredMessage="CHUPA NA MINHA GIROMBA, XINÓCA!!!"/>
+                                 requiredMessage="O campo nome é obrigatório"/>
 
                     <h:outputText value="CPF:"/>
                     <p:inputMask value="#{usuarioBean.usuario.cpf}" 
                                  mask="999-999-999-99"
                                  required="true"
+                                 requiredMessage="O campo CPF é obrigatório"
                                  validator="#{usuarioBean.validateCPF}"/>
 
                     <h:outputText value="E-mail:"/>
                     <p:inputText value="#{usuarioBean.usuario.email}"
                                  size="30"
                                  validator="#{usuarioBean.validateEmail}"
-                                 required="true">
+                                 required="true"
+                                 requiredMessage="O campo senha é obrigatório">
+                    
                     </p:inputText>
                     <h:outputText value="Senha"/>
                     <p:password id="senha"
@@ -52,10 +55,53 @@
                     <h:outputText value="Confirme a senha"/>
                     <p:password id="confirma"
                                 size="30"
-                                required="true"/>
+                                required="true"
+                                requiredMessage="O campo Confirmar senha é obrigatório"/>
+                    
                     <h:outputText value="Data de Nascimento"/>
                     <p:calendar value="#{usuarioBean.usuario.dataNascimento}"
-                                required="true"/>
+                                required="true"
+                                requiredMessage="O campo data de nascimento é obrigatório"/>
+
+                    <h:outputText value="País"/>
+                    <p:inputText required="true"
+                                 value="#{usuarioBean.usuario.endereco.pais}"
+                                 size="30"
+                                 requiredMessage="O campo país é obrigatório"/>
+
+                    <h:outputText value="Estado"/>
+                    <p:inputText required="true"
+                                 value="#{usuarioBean.usuario.endereco.uf}"
+                                 size="30"
+                                 requiredMessage="O campo estado é obrigatório"/>
+
+                    <h:outputText value="Cidade"/>
+                    <p:inputText required="true"
+                                 size="30"
+                                 value="#{usuarioBean.usuario.endereco.cidade}"
+                                 requiredMessage="O campo cidade é obrigatório"/>
+
+                    <h:outputText value="CEP"/>
+                    <p:inputText required="true"
+                                 size="30"
+                                 value="#{usuarioBean.usuario.endereco.cep}"
+                                 requiredMessage="O campo cep é obrigatório"/>
+
+                    <h:outputText value="Bairro"/>
+                    <p:inputText required="true"
+                                 size="30"
+                                 value="#{usuarioBean.usuario.endereco.bairro}"
+                                 requiredMessage="O campo bairro é obrigatório"/>
+
+
+                    <h:outputText value="Rua"/>
+                    <p:inputText value="#{usuarioBean.usuario.endereco.rua}"
+                                 size="30"/>
+
+                    <h:outputText value="Número"/>
+                    <p:inputText value="#{usuarioBean.usuario.endereco.numero}"
+                                 size="30"/>
+
 
 
                 </h:panelGrid>

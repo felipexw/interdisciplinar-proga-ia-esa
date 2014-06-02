@@ -11,7 +11,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
-import javax.faces.model.SelectItem;
 import javax.faces.validator.ValidatorException;
 import model.Sexo;
 import model.Usuario;
@@ -40,13 +39,22 @@ public class UsuarioBean implements Serializable {
     }
 
     public void save() {
-        UsuarioDAO dao = DAOFactory.getDAOFactory(DAOFactory.JPA)
+        UsuarioDAO userDao = DAOFactory.getDAOFactory(DAOFactory.JPA)
                 .getUsuarioDAO();
-        dao.update(usuario);
+        Usuario outro = userDao.findByEmail(usuario.getEmail());
+        if (outro == null) {
+            userDao.insert(usuario);
+            FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário cadastrado com sucesso!", ""));
+        } else {
+            usuario.setId(outro.getId());
+            userDao.update(usuario);
+            FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO, "Usuário atualizado com sucesso!", ""));
+        }
     }
 
     public void validateEmail(FacesContext ctx, UIComponent component, Object o) {
         new EmailValidator().validate(ctx, component, o);
+
     }
 
     public void validateCPF(FacesContext ctx, UIComponent component, Object o) {

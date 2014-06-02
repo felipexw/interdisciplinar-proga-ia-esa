@@ -12,6 +12,13 @@ import model.Usuario;
 public class JPAUsuarioDAO extends JPADAO<Usuario> implements UsuarioDAO {
 
     @Override
+    public Usuario findByEmail(String email) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("email", email);
+        return (Usuario) getJPAUtil().consultaNomeada("usuario.findByEmail", params);
+    }
+
+    @Override
     public Usuario login(String email, String senha) {
         Map<String, Object> params = new HashMap<>();
         params.put("email", email);

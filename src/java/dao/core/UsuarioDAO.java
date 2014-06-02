@@ -12,4 +12,6 @@ public interface UsuarioDAO extends DefaultDAO<Usuario> {
     Usuario login(String email, String senha);
 
     String listarCPF(String cpf);
+
+    Usuario findByEmail(String email);
 }

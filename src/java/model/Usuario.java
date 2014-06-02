@@ -16,7 +16,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-import util.GeraMD5;
+import utili.GeraMD5;
 
 /**
  *
@@ -24,7 +24,8 @@ import util.GeraMD5;
  */
 @NamedQueries({
     @NamedQuery(name = "usuario.listarcpf", query = "select u.cpf from Usuario u WHERE u.cpf = :cpf"),
-    @NamedQuery(name = "usuario.login", query = "select u from Usuario u WHERE u.email = :email AND u.senha = :senha")
+    @NamedQuery(name = "usuario.login", query = "select u from Usuario u WHERE u.email = :email AND u.senha = :senha"),
+    @NamedQuery(name = "usuario.findByEmail", query = "select u from Usuario u where u.email = :email")
 })
 
 @Entity
@@ -65,6 +66,9 @@ public class Usuario implements Serializable {
     }
 
     public Endereco getEndereco() {
+        if (endereco == null) {
+            endereco = new Endereco();
+        }
         return endereco;
     }
 
