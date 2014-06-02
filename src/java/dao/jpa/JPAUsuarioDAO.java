@@ -28,7 +28,7 @@ public class JPAUsuarioDAO extends JPADAO<Usuario> implements UsuarioDAO {
     public String listarCPF(String cpf) {
         Map<String, Object> params = new HashMap<>();
         params.put("cpf", cpf);
-        return (String) new JPAUtil<String>().consultaNomeada(cpf, params);
+        return (String) new JPAUtil<String>().consultaNomeada("usuario.listarcpf", params);
     }
 
 }

@@ -3,6 +3,7 @@ package web.bean;
 import dao.DAOFactory;
 import dao.core.UsuarioDAO;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -10,9 +11,11 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.faces.validator.ValidatorException;
 import model.Sexo;
 import model.Usuario;
+import web.validator.EmailValidator;
 
 /**
  *
@@ -23,6 +26,10 @@ import model.Usuario;
 public class UsuarioBean implements Serializable {
 
     private Usuario usuario;
+
+    public UsuarioBean() {
+        usuario = new Usuario();
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -39,17 +46,20 @@ public class UsuarioBean implements Serializable {
     }
 
     public void validateEmail(FacesContext ctx, UIComponent component, Object o) {
-        String cpf = (String) o;
+        new EmailValidator().validate(ctx, component, o);
+    }
 
-        if (cpf.equals("11111111111") || cpf.equals("22222222222")
-                || cpf.equals("00000000000")
-                || cpf.equals("33333333333")
-                || cpf.equals("44444444444")
-                || cpf.equals("55555555555")
-                || cpf.equals("66666666666")
-                || cpf.equals("77777777777")
-                || cpf.equals("88888888888")
-                || cpf.equals("99999999999")) {
+    public void validateCPF(FacesContext ctx, UIComponent component, Object o) {
+        String cpf = (String) o;
+        if (cpf.equals("111.111.111-11") || cpf.equals("222.222.222-22")
+                || cpf.equals("000.000.000-00")
+                || cpf.equals("333.333.333-33")
+                || cpf.equals("444.444.444-44")
+                || cpf.equals("555.555.555-55")
+                || cpf.equals("666.666.666-66")
+                || cpf.equals("777.777.777-77")
+                || cpf.equals("888.888.888-88")
+                || cpf.equals("999.999.999-99")) {
             throw new ValidatorException(new FacesMessage("CPF inválido. Por favor, informe outro valor."));
         } else {
             if (DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().listarCPF(cpf) != null) {
@@ -59,7 +69,9 @@ public class UsuarioBean implements Serializable {
     }
 
     public List<Sexo> getEnumsSexo() {
-        return Arrays.asList(Sexo.values());
+        List items = new ArrayList<Sexo>();
+        items.addAll(Arrays.asList(Sexo.values()));
+        return items;
     }
 
 }

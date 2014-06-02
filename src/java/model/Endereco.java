@@ -1,19 +1,39 @@
 package model;
 
 import java.io.Serializable;
+import javax.persistence.Column;
+import javax.persistence.Embeddable;
 
 /**
  *
  * @author Felipe
  */
+@Embeddable
 public class Endereco implements Serializable {
 
+    @Column(nullable = false, length = 100)
     private String pais;
+    @Column(nullable = false, length = 100)
     private String uf;
+    @Column(length = 16)
     private String cep;
+    @Column(length = 75)
     private String bairro;
+    @Column(length = 100, nullable = false)
     private String rua;
     private short numero;
+
+    public Endereco() {
+    }
+
+    public Endereco(String pais, String uf, String cep, String bairro, String rua, short numero) {
+        this.pais = pais;
+        this.uf = uf;
+        this.cep = cep;
+        this.bairro = bairro;
+        this.rua = rua;
+        this.numero = numero;
+    }
 
     public String getCep() {
         return cep;

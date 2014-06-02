@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -44,13 +45,15 @@ public class Usuario implements Serializable {
     @Column(nullable = false)
     private String senha;
     @Enumerated(EnumType.STRING)
-    @Column(length = 13, nullable = false)
+    @Column(length = 13)
     private TipoUsuario tipo;
     @Enumerated(EnumType.STRING)
-    @Column(length = 9, nullable = false)
+    @Column(length = 9)
     private Sexo sexo;
+    @Embedded
+    private Endereco endereco;
 
-    public Usuario(String nome, String email, String cpf, Date dataNascimento, String senha, TipoUsuario tipo, Sexo sexo) {
+    public Usuario(String nome, String email, String cpf, Date dataNascimento, String senha, TipoUsuario tipo, Sexo sexo, Endereco enderec) {
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
@@ -58,6 +61,15 @@ public class Usuario implements Serializable {
         setSenha(senha);
         this.tipo = tipo;
         this.sexo = sexo;
+        endereco = enderec;
+    }
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
     }
 
     public TipoUsuario getTipo() {
