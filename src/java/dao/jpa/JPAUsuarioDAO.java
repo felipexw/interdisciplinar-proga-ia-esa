@@ -27,6 +27,13 @@ public class JPAUsuarioDAO extends JPADAO<Usuario> implements UsuarioDAO {
     }
 
     @Override
+    public Usuario findByNick(String nick) {
+        Map<String, Object> params = new HashMap<>();
+        params.put("nick", nick);
+        return (Usuario) getJPAUtil().consultaNomeada("usuario.findByNick", params);
+    }
+
+    @Override
     protected Class<Usuario> classEntity() {
         return Usuario.class;
     }

@@ -32,7 +32,6 @@ public class UsuarioBean implements Serializable {
     public UsuarioBean() {
         usuario = new Usuario();
         dataModel = new DefaultDataModel(getUsers());
-        usuariosSelecionados = new ArrayList<>();
     }
 
     public List<Usuario> getUsuariosSelecionados() {
@@ -80,6 +79,13 @@ public class UsuarioBean implements Serializable {
     public void validateEmail(FacesContext ctx, UIComponent component, Object o) {
         new EmailValidator().validate(ctx, component, o);
 
+    }
+
+    public void validateNick(FacesContext ctg, UIComponent ui, Object o) {
+        String nick = (String) o;
+        if (DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().findByNick(nick) != null) {
+            throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_ERROR, "Já há um nick cadastro com esse valor. Por favor, informe outro.", ""));
+        }
     }
 
     public void validateCPF(FacesContext ctx, UIComponent component, Object o) {

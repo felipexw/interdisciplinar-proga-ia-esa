@@ -26,7 +26,8 @@ import utili.Col;
 @NamedQueries({
     @NamedQuery(name = "usuario.listarcpf", query = "select u.cpf from Usuario u WHERE u.cpf = :cpf"),
     @NamedQuery(name = "usuario.login", query = "select u from Usuario u WHERE u.email = :email AND u.senha = :senha"),
-    @NamedQuery(name = "usuario.findByEmail", query = "select u from Usuario u where u.email = :email")
+    @NamedQuery(name = "usuario.findByEmail", query = "select u from Usuario u where u.email = :email"),
+    @NamedQuery(name = "usuario.findByNick", query = "select u from Usuario u WHERE u.nick = :nick")
 })
 
 @Entity
@@ -54,8 +55,10 @@ public class Usuario implements Serializable {
     private Sexo sexo;
     @Embedded
     private Endereco endereco;
+    @Column(nullable = false, length = 55, unique = true)
+    private String nick;
 
-    public Usuario(String nome, String email, String cpf, Date dataNascimento, String senha, TipoUsuario tipo, Sexo sexo, Endereco enderec) {
+    public Usuario(String nome, String email, String cpf, Date dataNascimento, String senha, TipoUsuario tipo, Sexo sexo, String nick, Endereco enderec) {
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
@@ -64,6 +67,15 @@ public class Usuario implements Serializable {
         this.tipo = tipo;
         this.sexo = sexo;
         endereco = enderec;
+        this.nick = nick;
+    }
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
     }
 
     public Endereco getEndereco() {

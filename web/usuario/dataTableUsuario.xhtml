@@ -18,13 +18,13 @@
                              emptyMessage="Não há usuários cadastrados">
                     <p:column selectionMode="multiple"
                               width="2%"/>
-                    <p:column headerText="#{msg.Administrador}"
-                              filterBy="#{administrador.nome}">
-                        #{administrador.nome}
+                    <p:column headerText="Usuário"
+                              filterBy="#{usuario.nome}">
+                        #{usuario.nome}
                     </p:column>
-                    <p:column headerText="#{msg.Email}"
-                              filterBy="#{administrador.email}">
-                        #{administrador.email}
+                    <p:column headerText="E-mail"
+                              filterBy="#{usuario.email}">
+                        #{usuario.email}
                     </p:column>
                     <p:column width="2%">
                         <p:commandButton icon="ui-icon-pencil"
@@ -33,11 +33,7 @@
                                          update=":formUsuario"/>
                     </p:column>
                 </p:dataTable>
-            </p:scrollPanel>
-            <p:commandButton value="Excluir"
-                             actionListener="#{usuarioBean.remove()}"
-                             update="dataTableUsuario"
-                             style="float: bottom; float: left"/>
+            </p:scrollPanel>            
         </p:dialog>
     </h:form>
 </ui:composition>

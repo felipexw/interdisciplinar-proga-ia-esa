@@ -44,21 +44,28 @@
                                  size="23"
                                  validator="#{usuarioBean.validateEmail}"
                                  required="true"
-                                 requiredMessage="O campo senha é obrigatório">
-                    
-                    </p:inputText>
+                                 requiredMessage="O campo senha é obrigatório"/>
+
+                    <h:outputText value="Nick:"/>
+                    <p:inputText value="#{usuarioBean.usuario.nick}"
+                                 size="23"
+                                 validator="#{usuarioBean.validateNick}"
+                                 required="true"
+                                 requiredMessage="O campo nick é obrigatório"/>
+
                     <h:outputText value="Senha"/>
                     <p:password id="senha"
                                 value="#{usuarioBean.usuario.senha}"
                                 match="confirma"
                                 size="23"
                                 required="true"/>
+
                     <h:outputText value="Confirme a senha"/>
                     <p:password id="confirma"
                                 size="23"
                                 required="true"
                                 requiredMessage="O campo Confirmar senha é obrigatório"/>
-                    
+
                     <h:outputText value="Data de Nascimento"/>
                     <p:calendar value="#{usuarioBean.usuario.dataNascimento}"
                                 required="true"
@@ -95,18 +102,12 @@
                                  value="#{usuarioBean.usuario.endereco.bairro}"
                                  requiredMessage="O campo bairro é obrigatório"/>
 
-
                     <h:outputText value="Rua"/>
                     <p:inputText value="#{usuarioBean.usuario.endereco.rua}"
-                                 size="30"/>
+                                 size="22"/>
 
-                    <h:outputText value="Número"/>
-                    <p:inputText value="#{usuarioBean.usuario.endereco.numero}"
-                                 size="5"/>
+                </h:panelGrid>               
 
-
-
-                </h:panelGrid>
                 <h:panelGrid columns="2">
                     <p:commandButton value="Salvar"
                                      style="float: right"

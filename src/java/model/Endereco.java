@@ -23,18 +23,16 @@ public class Endereco implements Serializable {
     private String bairro;
     @Column(length = 100, nullable = false)
     private String rua;
-    private short numero;
 
     public Endereco() {
     }
 
-    public Endereco(String pais, String uf, String cep, String bairro, String rua, short numero, String cidade) {
+    public Endereco(String pais, String uf, String cep, String bairro, String rua, String cidade) {
         this.pais = pais;
         this.uf = uf;
         this.cep = cep;
         this.bairro = bairro;
         this.rua = rua;
-        this.numero = numero;
         this.cidade = cidade;
     }
 
@@ -52,14 +50,6 @@ public class Endereco implements Serializable {
 
     public void setRua(String rua) {
         this.rua = rua;
-    }
-
-    public short getNumero() {
-        return numero;
-    }
-
-    public void setNumero(short numero) {
-        this.numero = numero;
     }
 
     public String getUf() {
