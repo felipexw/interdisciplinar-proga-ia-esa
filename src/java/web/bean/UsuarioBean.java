@@ -14,6 +14,7 @@ import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
 import model.Sexo;
 import model.Usuario;
+import web.bean.datamodel.DefaultDataModel;
 import web.validator.EmailValidator;
 
 /**
@@ -24,10 +25,34 @@ import web.validator.EmailValidator;
 @SessionScoped
 public class UsuarioBean implements Serializable {
 
+    private DefaultDataModel dataModel;
     private Usuario usuario;
+    private List<Usuario> usuariosSelecionados;
 
     public UsuarioBean() {
         usuario = new Usuario();
+        dataModel = new DefaultDataModel(getUsers());
+        usuariosSelecionados = new ArrayList<>();
+    }
+
+    public List<Usuario> getUsuariosSelecionados() {
+        return usuariosSelecionados;
+    }
+
+    public void setUsuariosSelecionados(List<Usuario> usuariosSelecionados) {
+        this.usuariosSelecionados = usuariosSelecionados;
+    }
+
+    public DefaultDataModel getDataModel() {
+        return dataModel;
+    }
+
+    public void setDataModel(DefaultDataModel dataModel) {
+        this.dataModel = dataModel;
+    }
+
+    public List<Usuario> getUsers() {
+        return DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().listAll();
     }
 
     public Usuario getUsuario() {

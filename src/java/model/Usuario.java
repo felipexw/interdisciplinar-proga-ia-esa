@@ -15,8 +15,9 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-
+import web.bean.datamodel.DefaultDataModel;
 import utili.GeraMD5;
+import utili.Col;
 
 /**
  *
@@ -95,6 +96,7 @@ public class Usuario implements Serializable {
     public Usuario() {
     }
 
+    @Col
     public Integer getId() {
         return id;
     }
@@ -141,5 +143,9 @@ public class Usuario implements Serializable {
 
     public void setSenha(String senha) {
         this.senha = GeraMD5.criptografar(senha);
+    }
+
+    public void remove() {
+
     }
 }

@@ -19,7 +19,7 @@
                 <h:panelGrid columns="2">
                     <h:outputText value="Usuário"/>
                     <p:commandButton icon="ui-icon-search"
-                                     oncomplete="dlgDataTableUsuario.show()"
+                                     onclick="dlgDataTableUsuario.show();"
                                      type="button"
                                      style="float: top; float: left;"/>
                 </h:panelGrid>
@@ -36,11 +36,12 @@
                                  mask="999-999-999-99"
                                  required="true"
                                  requiredMessage="O campo CPF é obrigatório"
-                                 validator="#{usuarioBean.validateCPF}"/>
+                                 validator="#{usuarioBean.validateCPF}"
+                                 size="13"/>
 
                     <h:outputText value="E-mail:"/>
                     <p:inputText value="#{usuarioBean.usuario.email}"
-                                 size="30"
+                                 size="23"
                                  validator="#{usuarioBean.validateEmail}"
                                  required="true"
                                  requiredMessage="O campo senha é obrigatório">
@@ -50,18 +51,19 @@
                     <p:password id="senha"
                                 value="#{usuarioBean.usuario.senha}"
                                 match="confirma"
-                                size="30"
+                                size="23"
                                 required="true"/>
                     <h:outputText value="Confirme a senha"/>
                     <p:password id="confirma"
-                                size="30"
+                                size="23"
                                 required="true"
                                 requiredMessage="O campo Confirmar senha é obrigatório"/>
                     
                     <h:outputText value="Data de Nascimento"/>
                     <p:calendar value="#{usuarioBean.usuario.dataNascimento}"
                                 required="true"
-                                requiredMessage="O campo data de nascimento é obrigatório"/>
+                                requiredMessage="O campo data de nascimento é obrigatório"
+                                size="8"/>
 
                     <h:outputText value="País"/>
                     <p:inputText required="true"
@@ -83,7 +85,7 @@
 
                     <h:outputText value="CEP"/>
                     <p:inputText required="true"
-                                 size="30"
+                                 size="11"
                                  value="#{usuarioBean.usuario.endereco.cep}"
                                  requiredMessage="O campo cep é obrigatório"/>
 
@@ -100,7 +102,7 @@
 
                     <h:outputText value="Número"/>
                     <p:inputText value="#{usuarioBean.usuario.endereco.numero}"
-                                 size="30"/>
+                                 size="5"/>
 
 
 

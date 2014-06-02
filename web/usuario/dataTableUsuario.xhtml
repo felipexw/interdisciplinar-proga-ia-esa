@@ -14,10 +14,8 @@
                              rows="10"
                              paginator="true"
                              paginatorPosition="bottom"
-                             value="#{administradorBean.dataModel}"
-                             emptyMessage="#{msg.Nenhum_resultado_encontrado}"
-                             selection="#{administradorBean.administradoresSelecionados}"
-                             filteredValue="#{administradorBean.administradoresFiltrados}">
+                             value="#{usuarioBean.dataModel}"
+                             emptyMessage="Não há usuários cadastrados">
                     <p:column selectionMode="multiple"
                               width="2%"/>
                     <p:column headerText="#{msg.Administrador}"
@@ -30,15 +28,14 @@
                     </p:column>
                     <p:column width="2%">
                         <p:commandButton icon="ui-icon-pencil"
-                                         title="#{msg.Editar}"
-                                         actionListener="#{administradorBean.editar(administrador)}"
+                                         title="Editar"
                                          onclick="dialogDataTableGrupo.hide()"
-                                         update=":formAdministrador"/>
+                                         update=":formUsuario"/>
                     </p:column>
                 </p:dataTable>
             </p:scrollPanel>
-            <p:commandButton value="#{msg.Excluir}"
-                             actionListener="#{administradorBean.excluir()}"
+            <p:commandButton value="Excluir"
+                             actionListener="#{usuarioBean.remove()}"
                              update="dataTableUsuario"
                              style="float: bottom; float: left"/>
         </p:dialog>
