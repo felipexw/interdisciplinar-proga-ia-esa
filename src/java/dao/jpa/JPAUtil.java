@@ -9,6 +9,7 @@ import javax.persistence.Query;
 /**
  *
  * @author Felipe
+ * @param <T>
  */
 public class JPAUtil<T extends Object> extends JPADAOFactory {
 

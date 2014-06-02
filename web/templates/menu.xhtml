@@ -5,16 +5,16 @@
 
     <h:form>
         <p:menubar autoDisplay="false">
-            <p:submenu label="Jogar">
-                <p:menuitem value="tesste"
-                            url="#"/>
+            <p:submenu label="Usuário">
+                <p:menuitem value="Cadastro"
+                            url="usuario/cadUsuario.jsf"/>
             </p:submenu>
-            
+
             <p:submenu label="#{loginBean.usuarioSessao.nome}"
                        icon="ui-icon-person"
                        style="float: right">
                 <p:menuitem value="Sair" 
-                            icon="ui-icon-power"
+                            icon="/images/usuario.jpg"
                             onclick="dlgSair.show()"/>
             </p:submenu>
         </p:menubar>

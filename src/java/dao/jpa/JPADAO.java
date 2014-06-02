@@ -12,11 +12,11 @@ import javax.persistence.EntityManager;
 abstract class JPADAO<T extends Object> extends JPADAOFactory implements DefaultDAO<T> {
 
     protected abstract Class<T> classEntity();
-    
-    protected JPAUtil<T> getJPAUtil(){
+
+    protected JPAUtil<T> getJPAUtil() {
         return new JPAUtil<>();
     }
-    
+
     @Override
     public void insert(T t) {
         EntityManager em = getEntityManager();

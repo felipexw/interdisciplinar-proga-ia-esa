@@ -1,0 +1,46 @@
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:form id="formDataTableUsuario">
+        <p:dialog id="dialogDataTableUsuario"
+                  widgetVar="dlgDataTableUsuario"
+                  closable="true"
+                  draggable="true"
+                  modal="true"
+                  width="800px">
+            <p:scrollPanel style="height: 400px">
+                <p:dataTable id="dataTableUsuario"
+                             var="usuario"
+                             rows="10"
+                             paginator="true"
+                             paginatorPosition="bottom"
+                             value="#{administradorBean.dataModel}"
+                             emptyMessage="#{msg.Nenhum_resultado_encontrado}"
+                             selection="#{administradorBean.administradoresSelecionados}"
+                             filteredValue="#{administradorBean.administradoresFiltrados}">
+                    <p:column selectionMode="multiple"
+                              width="2%"/>
+                    <p:column headerText="#{msg.Administrador}"
+                              filterBy="#{administrador.nome}">
+                        #{administrador.nome}
+                    </p:column>
+                    <p:column headerText="#{msg.Email}"
+                              filterBy="#{administrador.email}">
+                        #{administrador.email}
+                    </p:column>
+                    <p:column width="2%">
+                        <p:commandButton icon="ui-icon-pencil"
+                                         title="#{msg.Editar}"
+                                         actionListener="#{administradorBean.editar(administrador)}"
+                                         onclick="dialogDataTableGrupo.hide()"
+                                         update=":formAdministrador"/>
+                    </p:column>
+                </p:dataTable>
+            </p:scrollPanel>
+            <p:commandButton value="#{msg.Excluir}"
+                             actionListener="#{administradorBean.excluir()}"
+                             update="dataTableUsuario"
+                             style="float: bottom; float: left"/>
+        </p:dialog>
+    </h:form>
+</ui:composition>
