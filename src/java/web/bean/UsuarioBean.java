@@ -3,16 +3,15 @@ package web.bean;
 import dao.DAOFactory;
 import dao.core.UsuarioDAO;
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-import model.Sexo;
+import javax.servlet.http.HttpSession;
 import model.Usuario;
 import web.bean.datamodel.DefaultDataModel;
 import web.validator.EmailValidator;
@@ -78,7 +77,6 @@ public class UsuarioBean implements Serializable {
 
     public void validateEmail(FacesContext ctx, UIComponent component, Object o) {
         new EmailValidator().validate(ctx, component, o);
-
     }
 
     public void validateNick(FacesContext ctg, UIComponent ui, Object o) {
@@ -106,11 +104,4 @@ public class UsuarioBean implements Serializable {
             }
         }
     }
-
-    public List<Sexo> getEnumsSexo() {
-        List items = new ArrayList<Sexo>();
-        items.addAll(Arrays.asList(Sexo.values()));
-        return items;
-    }
-
 }

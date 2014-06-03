@@ -13,8 +13,8 @@
                   draggable="false"
                   modal="true"
                   id="caixalogin"
-                  rendered="#{loginBean.usuarioSessao eq null}"
-                  visible="#{loginBean.usuarioSessao eq null}">
+                  rendered="#{loginBean.userSession eq null}"
+                  visible="#{loginBean.userSession eq null}">
 
             <h:form id="frmLogin">
                 <h:panelGrid columns="2" id="panelLoginUser">
@@ -28,7 +28,7 @@
                     <p:password id="senha" 
                                 required="true"
                                 value="#{loginBean.usuario.senha}" 
-                                size="30"
+                                size="15"
                                 feedback="false"/>
                 </h:panelGrid>
                 <h:panelGrid columns="2" id="panelLoginActions">
@@ -36,9 +36,15 @@
 
                     <p:commandButton value="Conectar"
                                      style="margin-left: 20px;"
-                                     ajax="true"
                                      actionListener="#{loginBean.login()}"
                                      update=":frmLogin :messages"/>
+                    
+                    <h:link outcome="restaurarSenha" value="Esqueci minha senha"/>
+                                  
+                                  
+                                   
+                                   
+
                 </h:panelGrid>
             </h:form>
         </p:dialog>

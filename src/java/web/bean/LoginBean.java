@@ -3,12 +3,14 @@ package web.bean;
 import dao.DAOFactory;
 import java.io.IOException;
 import java.io.Serializable;
+import java.util.Random;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import model.Usuario;
+import utili.JavaMailSender;
 
 /**
  *
@@ -16,7 +18,7 @@ import model.Usuario;
  */
 @SessionScoped
 @ManagedBean
-public class LoginBean implements Serializable{
+public class LoginBean implements Serializable {
 
     private Usuario usuario;
 
@@ -47,16 +49,64 @@ public class LoginBean implements Serializable{
         }
     }
 
-    public Usuario getUsuarioSessao() {
+    public Usuario getUserSession() {
         return (Usuario) ((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false)).getAttribute("User");
     }
 
-    public String logout() throws Exception {
+    public String logout() {
         System.out.println("ssssssssssssssssssssssssssssssssssssssssssssssssss");
-        FacesContext context = FacesContext.getCurrentInstance();
-        HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
-        session.removeAttribute("User");
-        session.invalidate();
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
+            session.removeAttribute("User");
+            session.invalidate();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         return "index";
     }
+
+    public void restorePassword() {
+        String cpf = usuario.getCpf();
+        try {
+            usuario = DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().findByEmail(usuario.getEmail());
+            if (usuario != null) {
+                if (usuario.getCpf().equalsIgnoreCase(cpf)) {
+                    String passwd = generateRandomPasswd();
+                    usuario.setSenha(passwd);
+                    new JavaMailSender().sendEmail(usuario.getEmail(), passwd);
+                    DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().update(usuario);
+                    FacesContext.getCurrentInstance().
+                            addMessage("", new FacesMessage(FacesMessage.SEVERITY_WARN, "A nova senha foi encaminha para o e-mail.", ""));
+                } else {
+                    FacesContext.getCurrentInstance().
+                            addMessage("", new FacesMessage(FacesMessage.SEVERITY_WARN, "E-mail e CPF não conferem.", ""));
+                }
+            } else {
+                FacesContext.getCurrentInstance().
+                        addMessage("", new FacesMessage(FacesMessage.SEVERITY_WARN, "Não há usuário cadastrado com esse e-mail.", ""));
+            }
+            FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            FacesContext.getCurrentInstance().
+                    addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO, "Uma nova senha foi encaminhada para esse e-mail.", ""));
+        }
+
+    }
+
+    private String generateRandomPasswd() {
+        StringBuilder strBuilder = new StringBuilder();
+        Random random = new Random();
+        for (int i = 0; i < 2; i++) {
+            if (i % 2 == 0) {
+                strBuilder.append(random.nextInt(10));
+            } else {
+                strBuilder.append(random.nextGaussian());
+            }
+        }
+        return strBuilder.toString();
+    }
+
 }

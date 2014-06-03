@@ -9,13 +9,13 @@
                 <p:menuitem value="Cadastro"
                             url="../usuario/cadUsuario.jsf"/>
             </p:submenu>
-            
+
             <p:submenu label="Jogo">
                 <p:menuitem value="Jogar"
                             url="/game/jogo.jsf"/>
             </p:submenu>
 
-            <p:submenu label="#{loginBean.usuarioSessao.nome}"
+            <p:submenu label="#{loginBean.userSession.nome}"
                        icon="ui-icon-person"
                        style="float: right">
                 <p:menuitem value="Sair" 

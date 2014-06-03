@@ -15,5 +15,6 @@ public interface UsuarioDAO extends DefaultDAO<Usuario> {
 
     Usuario findByEmail(String email);
 
-    Usuario findByNick(String nick);
+    Usuario findByNick(String nick);    
+    
 }
