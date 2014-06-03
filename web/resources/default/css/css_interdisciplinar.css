@@ -1,6 +1,11 @@
 .ui-widget, .ui-widget .ui-widget {
     font-size: 90% !important;
 }
+
+.btn{
+    width: 200px;
+    height: 100px;
+}
 /*
 .ui-menuitem-text {
     font-size: 150% !important;

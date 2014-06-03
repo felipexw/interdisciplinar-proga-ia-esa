@@ -7,7 +7,12 @@
         <p:menubar autoDisplay="false">
             <p:submenu label="Usuário">
                 <p:menuitem value="Cadastro"
-                            url="/usuario/cadUsuario.jsf"/>
+                            url="../usuario/cadUsuario.jsf"/>
+            </p:submenu>
+            
+            <p:submenu label="Jogo">
+                <p:menuitem value="Jogar"
+                            url="/game/jogo.jsf"/>
             </p:submenu>
 
             <p:submenu label="#{loginBean.usuarioSessao.nome}"

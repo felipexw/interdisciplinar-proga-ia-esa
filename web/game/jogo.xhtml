@@ -1,0 +1,67 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/templates/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="corpo">
+        <h:form id="formJogo">
+            <p:dialog widgetVar="dlgJogo" 
+                      header="Jogo"
+                      resizable="false" 
+                      closable="true"
+                      minimizable="false"
+                      draggable="true"
+                      modal="true"
+                      visible="true"
+                      id="dialogJogo"> 
+                <h:panelGrid columns="3">
+                    <p:button id="btn_0"
+                              value=" "
+                              class="btn"
+                              onclick="click(this);"/>
+
+                    <p:button id="btn_1"
+                              value=" "
+                              class="btn"
+                              onclick="click(this);"/>
+
+                    <p:button class="btn"
+                              value=" "
+                              id="btn_2"
+                              onclick="click(this);"/>                              
+
+                    <p:button class="btn"
+                              value=" "
+                              id="btn_3"
+                              onclick="click(this);"/>
+
+                    <p:button class="btn"
+                              value=" "
+                              id="btn_4"
+                              onclick="click(this);"/>
+                              
+                    <p:button class="btn"
+                              value=" "
+                              id="btn_5"
+                              onclick="click(this);"/>                              
+
+                    <p:button class="btn"
+                              value=" "
+                              id="btn_6"
+                              onclick="click(this);"/>
+
+                    <p:button class="btn"
+                              value=" "
+                              id="btn_7"
+                              onclick="click(this);"/>                              
+
+                    <p:button class="btn"
+                              value=" "
+                              id="btn_8"
+                              onclick="click(this);"/>                              
+                </h:panelGrid>
+            </p:dialog>
+        </h:form> 
+    </ui:define>
+</ui:composition>
