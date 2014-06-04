@@ -4,14 +4,13 @@ import dao.DAOFactory;
 import dao.core.UsuarioDAO;
 import java.io.Serializable;
 import java.util.List;
-import java.util.Random;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
-import javax.servlet.http.HttpSession;
+import model.TipoUsuario;
 import model.Usuario;
 import web.bean.datamodel.DefaultDataModel;
 import web.validator.EmailValidator;
@@ -27,10 +26,19 @@ public class UsuarioBean implements Serializable {
     private DefaultDataModel dataModel;
     private Usuario usuario;
     private List<Usuario> usuariosSelecionados;
+    private UIComponent inputTipo;
 
     public UsuarioBean() {
         usuario = new Usuario();
         dataModel = new DefaultDataModel(getUsers());
+    }
+
+    public UIComponent getInputTipo() {
+        return inputTipo;
+    }
+
+    public void setInputTipo(UIComponent inputTipo) {
+        this.inputTipo = inputTipo;
     }
 
     public List<Usuario> getUsuariosSelecionados() {
@@ -103,5 +111,9 @@ public class UsuarioBean implements Serializable {
                 throw new ValidatorException(new FacesMessage("Este CPF já está cadastrado. Por favor, informe outro valor."));
             }
         }
+    }
+
+    public TipoUsuario[] tiposUsuarios() {
+        return TipoUsuario.values();
     }
 }

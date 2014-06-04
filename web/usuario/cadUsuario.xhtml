@@ -31,6 +31,12 @@
                                  required="true"
                                  requiredMessage="O campo nome é obrigatório"/>
 
+                    <h:outputText value="Sexo:"/>
+                    <p:selectOneRadio value="#{usuarioBean.usuario.sexo}">
+                        <f:selectItem itemLabel="Feminino" itemValue="F"/>
+                        <f:selectItem itemLabel="Masculino" itemValue="M"/>
+                    </p:selectOneRadio>
+
                     <h:outputText value="CPF:"/>
                     <p:inputMask value="#{usuarioBean.usuario.cpf}" 
                                  mask="999.999.999-99"
@@ -53,12 +59,19 @@
                                  required="true"
                                  requiredMessage="O campo nick é obrigatório"/>
 
+                    <h:outputText value="Tipo:"/>
+                    <p:selectOneRadio value="#{usuarioBean.usuario.tipo}"
+                                      binding="#{usuarioBean.inputTipo}">
+                        <f:selectItems value="#{usuarioBean.tiposUsuarios()}"/>
+                    </p:selectOneRadio>
+
                     <h:outputText value="Senha"/>
                     <p:password id="senha"
                                 value="#{usuarioBean.usuario.senha}"
                                 match="confirma"
                                 size="23"
-                                required="true"/>
+                                required="true"
+                                requiredMessage="O campo senha é obrigatório"/>
 
                     <h:outputText value="Confirme a senha"/>
                     <p:password id="confirma"

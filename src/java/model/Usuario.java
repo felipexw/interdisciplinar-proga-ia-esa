@@ -48,17 +48,16 @@ public class Usuario implements Serializable {
     @Column(nullable = false)
     private String senha;
     @Enumerated(EnumType.STRING)
-    @Column(length = 13)
+    @Column(length = 20, nullable = false)
     private TipoUsuario tipo;
-    @Enumerated(EnumType.STRING)
-    @Column(length = 9)
-    private Sexo sexo;
+    @Column(length = 1, nullable = false)
+    private char sexo;
     @Embedded
     private Endereco endereco;
     @Column(nullable = false, length = 55, unique = true)
     private String nick;
 
-    public Usuario(String nome, String email, String cpf, Date dataNascimento, String senha, TipoUsuario tipo, Sexo sexo, String nick, Endereco enderec) {
+    public Usuario(String nome, String email, String cpf, Date dataNascimento, String senha, TipoUsuario tipo, char sexo, String nick, Endereco enderec) {
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
@@ -97,11 +96,11 @@ public class Usuario implements Serializable {
         this.tipo = tipo;
     }
 
-    public Sexo getSexo() {
+    public char getSexo() {
         return sexo;
     }
 
-    public void setSexo(Sexo sexo) {
+    public void setSexo(char sexo) {
         this.sexo = sexo;
     }
 
@@ -157,7 +156,4 @@ public class Usuario implements Serializable {
         this.senha = GeraMD5.criptografar(senha);
     }
 
-    public void remove() {
-
-    }
 }

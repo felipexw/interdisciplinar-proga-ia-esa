@@ -1,4 +1,7 @@
-function click(uiComponent) {
+var state = [['0','0','0'], ['0','0','0'], ['0','0','0']];
+
+
+function checkSquart(uiComponent) {
     debugger;
-    console.log('click');
+    alert('CLICO!');
 }
