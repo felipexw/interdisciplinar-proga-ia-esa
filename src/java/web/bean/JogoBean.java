@@ -1,105 +1,151 @@
 package web.bean;
 
 import java.io.Serializable;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import minimax.TicTacToe;
 import model.Jogo;
+import org.primefaces.context.RequestContext;
 
 /**
  *
  * @author Felipe
  */
-@SessionScoped
+@ViewScoped
 @ManagedBean
 public class JogoBean implements Serializable {
 
     private Jogo jogo;
-    private UIComponent btn_0;
-    private UIComponent btn_1;
-    private UIComponent btn_2;
-    private UIComponent btn_3;
-    private UIComponent btn_4;
-    private UIComponent btn_5;
-    private UIComponent btn_6;
-    private UIComponent btn_7;
-    private UIComponent btn_8;
+    private TicTacToe game;
 
     public JogoBean() {
         this.jogo = new Jogo();
+        this.game = new TicTacToe();
     }
 
-    public UIComponent getBtn_0() {
-        return btn_0;
+    public void jogar(long index) {
+        RequestContext requestContext = RequestContext.getCurrentInstance();
+        String id = "'formJogo:btn_" + index + "'";
+        String str = "document.getElementById(" + id + ").innerHTML = 'X'";
+        System.out.println("----------------------------JOGADOR" + str);
+        boolean bPlayed = false;
+
+        switch ((int) index) {
+            case 0:
+                if (!(bPlayed = game.movePlayer((byte) 0, (byte) 0))) {
+                    FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_ERROR, "Posição inválida. Por favor, clique em outro quadrado.", ""));
+                }
+                break;
+
+            case 1:
+                if (!(bPlayed = game.movePlayer((byte) 0, (byte) 1))) {
+                    FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_FATAL, "Posição inválida. Por favor, clique em outro quadrado.", ""));
+                }
+                break;
+
+            case 2:
+                if (!(bPlayed = game.movePlayer((byte) 0, (byte) 2))) {
+                    FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_FATAL, "Posição inválida. Por favor, clique em outro quadrado.", ""));
+                }
+                break;
+
+            case 3:
+                if (!(bPlayed = game.movePlayer((byte) 1, (byte) 0))) {
+                    FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_FATAL, "Posição inválida. Por favor, clique em outro quadrado.", ""));
+                }
+                break;
+
+            case 4:
+                if (!(bPlayed = game.movePlayer((byte) 1, (byte) 1))) {
+                    FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_FATAL, "Posição inválida. Por favor, clique em outro quadrado.", ""));
+                }
+                break;
+
+            case 5:
+                if (!(bPlayed = game.movePlayer((byte) 1, (byte) 2))) {
+                    FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_FATAL, "Posição inválida. Por favor, clique em outro quadrado.", ""));
+                }
+                break;
+
+            case 6:
+                if (!(bPlayed = game.movePlayer((byte) 2, (byte) 0))) {
+                    FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_FATAL, "Posição inválida. Por favor, clique em outro quadrado.", ""));
+                }
+                break;
+
+            case 7:
+                if (!(bPlayed = game.movePlayer((byte) 2, (byte) 1))) {
+                    FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_FATAL, "Posição inválida. Por favor, clique em outro quadrado.", ""));
+                }
+                break;
+
+            case 8:
+                if (!(bPlayed = game.movePlayer((byte) 2, (byte) 2))) {
+                    FacesContext.getCurrentInstance().addMessage("", new FacesMessage(FacesMessage.SEVERITY_FATAL, "Posição inválida. Por favor, clique em outro quadrado.", ""));
+                }
+                break;
+        }
+        if (bPlayed) {
+            requestContext.execute(str);
+            computerPlay();
+        }
+
+        if (game.getCountTurns() == game.TAMANHO * game.TAMANHO) {
+            str = "alert('" + game.getWinner() + "')";
+            RequestContext.getCurrentInstance().execute(str);
+            initGame();
+        }
     }
 
-    public void setBtn_0(UIComponent btn_0) {
-        this.btn_0 = btn_0;
+    private void computerPlay() {
+        StringBuilder strBuilder = new StringBuilder("document.getElementById('formJogo:btn_");
+        byte[] computer = game.movimentoComputador();
+
+        if (computer[0] == 0) {
+            if (computer[1] == 0) {
+                strBuilder.append(0);
+            } else if (computer[1] == 1) {
+                strBuilder.append(1);
+            } else {
+                strBuilder.append(2);
+            }
+        } else if (computer[0] == 1) {
+            if (computer[1] == 0) {
+                strBuilder.append(3);
+            } else if (computer[1] == 1) {
+                strBuilder.append(4);
+            } else {
+                strBuilder.append(5);
+            }
+        } else if (computer[0] == 2) {
+            if (computer[1] == 0) {
+                strBuilder.append(6);
+            } else if (computer[1] == 1) {
+                strBuilder.append(7);
+            } else {
+                strBuilder.append(8);
+            }
+        }
+        strBuilder.append("').innerHTML = 'O'");
+        System.out.println(strBuilder);
+        RequestContext.getCurrentInstance().execute(strBuilder.toString());
+
+        if (game.getCountTurns() == (game.TAMANHO * game.TAMANHO) - 1) {
+            String str = "alert('" + game.getWinner() + "')";
+            RequestContext.getCurrentInstance().execute(str);
+            initGame();
+        }
     }
 
-    public UIComponent getBtn_1() {
-        return btn_1;
-    }
-
-    public void setBtn_1(UIComponent btn_1) {
-        this.btn_1 = btn_1;
-    }
-
-    public UIComponent getBtn_2() {
-        return btn_2;
-    }
-
-    public void setBtn_2(UIComponent btn_2) {
-        this.btn_2 = btn_2;
-    }
-
-    public UIComponent getBtn_3() {
-        return btn_3;
-    }
-
-    public void setBtn_3(UIComponent btn_3) {
-        this.btn_3 = btn_3;
-    }
-
-    public UIComponent getBtn_4() {
-        return btn_4;
-    }
-
-    public void setBtn_4(UIComponent btn_4) {
-        this.btn_4 = btn_4;
-    }
-
-    public UIComponent getBtn_5() {
-        return btn_5;
-    }
-
-    public void setBtn_5(UIComponent btn_5) {
-        this.btn_5 = btn_5;
-    }
-
-    public UIComponent getBtn_6() {
-        return btn_6;
-    }
-
-    public void setBtn_6(UIComponent btn_6) {
-        this.btn_6 = btn_6;
-    }
-
-    public UIComponent getBtn_7() {
-        return btn_7;
-    }
-
-    public void setBtn_7(UIComponent btn_7) {
-        this.btn_7 = btn_7;
-    }
-
-    public UIComponent getBtn_8() {
-        return btn_8;
-    }
-
-    public void setBtn_8(UIComponent btn_8) {
-        this.btn_8 = btn_8;
+    private void initGame() {
+        for (byte i = 0; i < game.TAMANHO * game.TAMANHO; i++) {
+            String id = "'formJogo:btn_" + i + "'";
+            String str = "document.getElementById(" + id + ").innerHTML = ''";
+            RequestContext.getCurrentInstance().execute(str);
+        }
+        game = new TicTacToe();
     }
 
     public Jogo getJogo() {

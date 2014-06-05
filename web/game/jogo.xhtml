@@ -6,12 +6,6 @@
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="corpo">
         <h:outputScript library="default/js" name="js_jogo.js"/>
-        <script type="text/javascript">
-            function update() {
-//                debugger;
-                console.log(Mensagem.getMessage());
-            }
-        </script>
         <h:form id="formJogo">
             <p:dialog widgetVar="dlgJogo" 
                       header="Jogo"
@@ -23,59 +17,68 @@
                       visible="true"
                       id="dialogJogo"> 
                 <h:panelGrid columns="3">
-                    <p:button id="btn_0"
-                              value=" "
-                              class="btn"
-                              onclick="update()"
-                              binding="#{jogoBean.btn_0}"/>
+                    <p:commandButton
+                        id="btn_0"
+                        value=" "
+                        class="btn"
+                        actionListener="#{jogoBean.jogar(0)}"
+                        style="line-height: 200%"/>
 
-                    <p:button id="btn_1"
-                              value=" "
-                              class="btn"
-                              onclick="checkSquart(this);"
-                              binding="#{jogoBean.btn_1}"/>
 
-                    <p:button class="btn"
-                              value=" "
-                              id="btn_2"
-                              onclick="checkSquart(this);"
-                              binding="#{jogoBean.btn_2}"/>
+                    <p:commandButton
+                        id="btn_1"
+                        value=" "
+                        class="btn"
+                        actionListener="#{jogoBean.jogar(1)}"/>
 
-                    <p:button class="btn"
-                              value=" "
-                              id="btn_3"
-                              onclick="checkSquart(this);"
-                              binding="#{jogoBean.btn_3}"/>
 
-                    <p:button class="btn"
-                              value=" "
-                              id="btn_4"
-                              onclick="checkSquart(this);"
-                              binding="#{jogoBean.btn_4}"/>
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_2"
+                        actionListener="#{jogoBean.jogar(2)}"/>
 
-                    <p:button class="btn"
-                              value=" "
-                              id="btn_5"
-                              onclick="checkSquart(this);"
-                              binding="#{jogoBean.btn_5}"/>
 
-                    <p:button class="btn"
-                              value=" "
-                              id="btn_6"
-                              onclick="checkSquart(this);"
-                              binding="#{jogoBean.btn_6}"/>
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_3"
+                        actionListener="#{jogoBean.jogar(3)}"/>
 
-                    <p:button class="btn"
-                              value=" "
-                              id="btn_7"
-                              onclick="checkSquart(this);"
-                              binding="#{jogoBean.btn_7}"/>
 
-                    <p:button class="btn"
-                              value=" "
-                              id="btn_8"
-                              onclick="checkSquart(this);"
-                              binding="#{jogoBean.btn_8}"/>
+                    <p:commandButton
+                        class="btn"
+                        value=" "
+                        id="btn_4"
+                        actionListener="#{jogoBean.jogar(4)}"/>
+
+
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_5"
+                        actionListener="#{jogoBean.jogar(5)}"/>
+
+
+                    <p:commandButton
+                        class="btn"
+                        value=" "
+                        id="btn_6"
+                        actionListener="#{jogoBean.jogar(6)}"/>
+
+
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_7"
+                        actionListener="#{jogoBean.jogar(7)}"/>
+
+
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_8"
+                        actionListener="#{jogoBean.jogar(8)}"/>
                 </h:panelGrid>                
             </p:dialog>
         </h:form> 

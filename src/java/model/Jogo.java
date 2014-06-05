@@ -1,5 +1,6 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -7,7 +8,7 @@ import java.util.List;
  *
  * @author Felipe
  */
-public class Jogo {
+public class Jogo implements Serializable {
 
     private Integer id;
     private Date dataInicio;

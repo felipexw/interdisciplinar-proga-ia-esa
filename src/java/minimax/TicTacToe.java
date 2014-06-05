@@ -1,9 +1,6 @@
 package minimax;
 
-import java.util.Random;
-import javax.swing.JOptionPane;
-
-public class TicTacToe {
+public class TicTacToe implements java.io.Serializable {
 
     private byte bestc[];
     private byte bestr[];
@@ -28,6 +25,7 @@ public class TicTacToe {
     private byte valueWinner;
 
     public TicTacToe() {
+        initGame();
         bestr = new byte[1];
         bestc = new byte[1];
         winner = false;
@@ -51,14 +49,20 @@ public class TicTacToe {
     }
 
     public void initGame(byte tipoJogo) {
-        Random random = new Random();
         this.tipoJogo = tipoJogo;
-        if (tipoJogo == COMPUTADORxHUMANO) {
-            turn = (random.nextInt() * random.nextInt() / random.nextDouble() % 2 == 0) ? HUMAN : COMPUTER;
-        } else {
-            turn = (random.nextInt() * random.nextInt() / random.nextDouble() % 2 == 1) ? HUMAN : HUMAN2;
-        }
+        turn = HUMAN;
 
+        position = new byte[TAMANHO][TAMANHO];
+        for (int i = 0; i < TAMANHO; i++) {
+            for (int j = 0; j < TAMANHO; j++) {
+                position[i][j] = EMPTY;
+            }
+        }
+    }
+
+    public void initGame() {
+        turn = HUMAN;
+        tipoJogo = COMPUTADORxHUMANO;
         position = new byte[TAMANHO][TAMANHO];
         for (int i = 0; i < TAMANHO; i++) {
             for (int j = 0; j < TAMANHO; j++) {
@@ -144,23 +148,23 @@ public class TicTacToe {
     public void win() {
         winner = theresWinColumn();
         if (winner) {
-            JOptionPane.showMessageDialog(null, "Vencedor na coluna");
+            System.out.println("Vencedor na coluna");
         } else {
             if ((winner = theresWinLine())) {
-                JOptionPane.showMessageDialog(null, "Vencedor na linha");
+                System.out.println("Vencedor na linha");
             } else {
                 if ((winner = theresWinMainDiag())) {
-                    JOptionPane.showMessageDialog(null, "Vencedor na DP!");
+                    System.out.println("Vencedor na DP!");
                 } else {
                     if ((winner = theresWinSecDiag())) {
-                        JOptionPane.showMessageDialog(null, "Vencedor na DS!");
+                        System.out.println("Vencedor na DS!");
                     }
                 }
             }
         }
     }
 
-    public byte[] movimentoCompudador() {
+    public byte[] movimentoComputador() {
         miniMax(new GameState(position), COMPUTER, HUMAN_WIN, COMPUTER_WIN, bestc, bestr);
         byte ret[] = new byte[2];
         position[bestr[0]][bestc[0]] = COMPUTER;
@@ -172,7 +176,11 @@ public class TicTacToe {
         return ret;
     }
 
-    public void setMovimentoJogador(byte x, byte y) {
+    private boolean isValidPlay(byte i, byte j) {
+        return position[i][j] == EMPTY;
+    }
+
+    public boolean movePlayer(byte i, byte j) {
         /**
          * *********************************************************************
          * Stores human move in array. Precondition: Call from plotMove in
@@ -180,23 +188,25 @@ public class TicTacToe {
          * make move.
          * ********************************************************************
          */
-        if (position[x][y] == EMPTY) {
+        if (isValidPlay(i, j)) {
             if (tipoJogo == COMPUTADORxHUMANO) {
-                position[x][y] = HUMAN;
+                position[i][j] = HUMAN;
                 turn = COMPUTER;
             } else {
                 if (turn == HUMAN) {
-                    position[x][y] = HUMAN;
+                    position[i][j] = HUMAN;
                     turn = HUMAN2;
                 } else {
-                    position[x][y] = HUMAN2;
+                    position[i][j] = HUMAN2;
                     turn = HUMAN;
                 }
             }
             countTurns++;
             System.out.println(countTurns);
             win();
+            return true;
         }
+        return false;
     }
 
     public byte evaluate(GameState gs) {

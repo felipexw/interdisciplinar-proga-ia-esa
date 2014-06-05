@@ -5,5 +5,13 @@
         <create creator="new" javascript="Mensagem" scope="request">
             <param name="class" value="view.Message"/>
         </create>
+        
+        <create creator="new" javascript="Game" scope="application">
+            <param name="class" value="minimax.TicTacToe"/>
+        </create>        
+        
+        <create creator="new" javascript="GameState" scope="application">
+            <param name="class" value="minimax.GameState"/>
+        </create>
     </allow>
 </dwr>

@@ -28,50 +28,50 @@ public class GradeJogo extends JPanel {
     }
 
     private void setup() {
-        setLayout(new GridLayout(TAMANHO, TAMANHO, 5, 5));
-        setFonte("Arial", Font.BOLD, 80);
-
-        jbut = new JButton[TAMANHO][TAMANHO];
-        for (byte i = 0; i < TAMANHO; i++) {
-            for (byte j = 0; j < TAMANHO; j++) {
-                jbut[i][j] = new JButton();
-                jbut[i][j].setFont(getFonte());
-                jbut[i][j].addActionListener(new ControlaJogo());
-                add(jbut[i][j]);
-            }
-        }
-
-        Object[] tiposJogo = {"Computador Versus Humano",
-            "Humano Versus Humano"};
-
-        Object escolha = JOptionPane.showInputDialog(null,
-                "Escolha a Forma do Jogo", "Jogo da Velha",
-                JOptionPane.INFORMATION_MESSAGE, null, tiposJogo, tiposJogo[0]);
-
-        if (escolha != null) {
-            if (escolha.equals(tiposJogo[0])) {
-                tipoJogoEscolhido = game.COMPUTADORxHUMANO;
-            } else {
-                tipoJogoEscolhido = game.HUMANOxHUMANO;
-            }
-        }
+//        setLayout(new GridLayout(TAMANHO, TAMANHO, 5, 5));
+//        setFonte("Arial", Font.BOLD, 80);
+//
+//        jbut = new JButton[TAMANHO][TAMANHO];
+//        for (byte i = 0; i < TAMANHO; i++) {
+//            for (byte j = 0; j < TAMANHO; j++) {
+//                jbut[i][j] = new JButton();
+//                jbut[i][j].setFont(getFonte());
+//                jbut[i][j].addActionListener(new ControlaJogo());
+//                add(jbut[i][j]);
+//            }
+//        }
+//
+//        Object[] tiposJogo = {"Computador Versus Humano",
+//            "Humano Versus Humano"};
+//
+//        Object escolha = JOptionPane.showInputDialog(null,
+//                "Escolha a Forma do Jogo", "Jogo da Velha",
+//                JOptionPane.INFORMATION_MESSAGE, null, tiposJogo, tiposJogo[0]);
+//
+//        if (escolha != null) {
+//            if (escolha.equals(tiposJogo[0])) {
+//                tipoJogoEscolhido = game.COMPUTADORxHUMANO;
+//            } else {
+//                tipoJogoEscolhido = game.HUMANOxHUMANO;
+//            }
+//        }
         this.init();
     }
 
     public void init() {
-        game.initGame(tipoJogoEscolhido);
-        if (game.getTurn() == game.COMPUTER) {
-            JOptionPane.showMessageDialog(null, "Computador Come�a!",
-                    "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
-            byte[] ret = game.movimentoCompudador();
-            jbut[ret[0]][ret[1]].setText("O");
-        } else if (game.getTurn() == game.HUMAN) {
-            JOptionPane.showMessageDialog(null, "Jogador1 Come�a!",
-                    "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
-        } else {
-            JOptionPane.showMessageDialog(null, "Jogador2 Come�a!",
-                    "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
-        }
+//        game.initGame(tipoJogoEscolhido);
+//        if (game.getTurn() == game.COMPUTER) {
+//            JOptionPane.showMessageDialog(null, "Computador Começa!",
+//                    "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
+//            byte[] ret = game.movimentoCompudador();
+//            jbut[ret[0]][ret[1]].setText("O");
+//        } else if (game.getTurn() == game.HUMAN) {
+//            JOptionPane.showMessageDialog(null, "Jogador1 Come�a!",
+//                    "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
+//        } else {
+//            JOptionPane.showMessageDialog(null, "Jogador2 Come�a!",
+//                    "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
+//        }
     }
 
     public Font getFonte() {
@@ -92,7 +92,7 @@ public class GradeJogo extends JPanel {
                     JOptionPane.showMessageDialog(null, "Jogada Invalida!",
                             "Jogo da Velha", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    game.setMovimentoJogador((byte) 0, (byte) 0);
+                    game.movePlayer((byte) 0, (byte) 0);
                     if (tipoJogoEscolhido == game.HUMANOxHUMANO) {
                         if (game.getTurn() == game.HUMAN) {
                             jbut[0][0].setText("X");
@@ -101,7 +101,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[0][0].setText("X");
-                        ret = game.movimentoCompudador();
+                        ret = game.movimentoComputador();
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -110,7 +110,7 @@ public class GradeJogo extends JPanel {
                     JOptionPane.showMessageDialog(null, "Jogada Invalida!",
                             "Jogo da Velha", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    game.setMovimentoJogador((byte) 0, (byte) 1);
+                    game.movePlayer((byte) 0, (byte) 1);
                     if (tipoJogoEscolhido == game.HUMANOxHUMANO) {
                         if (game.getTurn() == game.HUMAN) {
                             jbut[0][1].setText("X");
@@ -119,7 +119,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[0][1].setText("X");
-                        ret = game.movimentoCompudador();
+                        ret = game.movimentoComputador();
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -128,7 +128,7 @@ public class GradeJogo extends JPanel {
                     JOptionPane.showMessageDialog(null, "Jogada Invalida!",
                             "Jogo da Velha", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    game.setMovimentoJogador((byte) 0, (byte) 2);
+                    game.movePlayer((byte) 0, (byte) 2);
                     if (tipoJogoEscolhido == game.HUMANOxHUMANO) {
                         if (game.getTurn() == game.HUMAN) {
                             jbut[0][2].setText("X");
@@ -137,7 +137,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[0][2].setText("X");
-                        ret = game.movimentoCompudador();
+                        ret = game.movimentoComputador();
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -146,7 +146,7 @@ public class GradeJogo extends JPanel {
                     JOptionPane.showMessageDialog(null, "Jogada Invalida!",
                             "Jogo da Velha", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    game.setMovimentoJogador((byte) 1, (byte) 0);
+                    game.movePlayer((byte) 1, (byte) 0);
                     if (tipoJogoEscolhido == game.HUMANOxHUMANO) {
                         if (game.getTurn() == game.HUMAN) {
                             jbut[1][0].setText("X");
@@ -155,7 +155,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[1][0].setText("X");
-                        ret = game.movimentoCompudador();
+                        ret = game.movimentoComputador();
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -164,7 +164,7 @@ public class GradeJogo extends JPanel {
                     JOptionPane.showMessageDialog(null, "Jogada Invalida!",
                             "Jogo da Velha", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    game.setMovimentoJogador((byte) 1, (byte) 1);
+                    game.movePlayer((byte) 1, (byte) 1);
                     if (tipoJogoEscolhido == game.HUMANOxHUMANO) {
                         if (game.getTurn() == game.HUMAN) {
                             jbut[1][1].setText("X");
@@ -173,7 +173,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[1][1].setText("X");
-                        ret = game.movimentoCompudador();
+                        ret = game.movimentoComputador();
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -182,7 +182,7 @@ public class GradeJogo extends JPanel {
                     JOptionPane.showMessageDialog(null, "Jogada Invalida!",
                             "Jogo da Velha", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    game.setMovimentoJogador((byte) 1, (byte) 2);
+                    game.movePlayer((byte) 1, (byte) 2);
                     if (tipoJogoEscolhido == game.HUMANOxHUMANO) {
                         if (game.getTurn() == game.HUMAN) {
                             jbut[1][2].setText("X");
@@ -191,7 +191,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[1][2].setText("X");
-                        ret = game.movimentoCompudador();
+                        ret = game.movimentoComputador();
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -200,7 +200,7 @@ public class GradeJogo extends JPanel {
                     JOptionPane.showMessageDialog(null, "Jogada Invalida!",
                             "Jogo da Velha", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    game.setMovimentoJogador((byte) 2, (byte) 0);
+                    game.movePlayer((byte) 2, (byte) 0);
                     if (tipoJogoEscolhido == game.HUMANOxHUMANO) {
                         if (game.getTurn() == game.HUMAN) {
                             jbut[2][0].setText("X");
@@ -209,7 +209,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[2][0].setText("X");
-                        ret = game.movimentoCompudador();
+                        ret = game.movimentoComputador();
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -218,7 +218,7 @@ public class GradeJogo extends JPanel {
                     JOptionPane.showMessageDialog(null, "Jogada Invalida!",
                             "Jogo da Velha", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    game.setMovimentoJogador((byte) 2, (byte) 1);
+                    game.movePlayer((byte) 2, (byte) 1);
                     if (tipoJogoEscolhido == game.HUMANOxHUMANO) {
                         if (game.getTurn() == game.HUMAN) {
                             jbut[2][1].setText("X");
@@ -227,7 +227,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[2][1].setText("X");
-                        ret = game.movimentoCompudador();
+                        ret = game.movimentoComputador();
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -236,7 +236,7 @@ public class GradeJogo extends JPanel {
                     JOptionPane.showMessageDialog(null, "Jogada Invalida!",
                             "Jogo da Velha", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    game.setMovimentoJogador((byte) 2, (byte) 2);
+                    game.movePlayer((byte) 2, (byte) 2);
                     if (tipoJogoEscolhido == game.HUMANOxHUMANO) {
                         if (game.getTurn() == game.HUMAN) {
                             jbut[2][2].setText("X");
@@ -244,12 +244,12 @@ public class GradeJogo extends JPanel {
                             jbut[2][2].setText("O");
                         } else {
                             jbut[2][2].setText("X");
-                            ret = game.movimentoCompudador();
+                            ret = game.movimentoComputador();
                             jbut[ret[0]][ret[1]].setText("O");
                         }
                     } else {
                         jbut[2][2].setText("X");
-                        ret = game.movimentoCompudador();
+                        ret = game.movimentoComputador();
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
