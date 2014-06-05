@@ -3,10 +3,9 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Felipe/Documents/NetBeansProjects/Intedisciplinar/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/Felipe/Documents/NetBeansProjects/Intedisciplinar/web/WEB-INF/dwr.xml</file>
-            <file>file:/C:/Users/Felipe/Documents/NetBeansProjects/Intedisciplinar/src/java/view/Message.java</file>
-            <file>file:/C:/Users/Felipe/Documents/NetBeansProjects/Intedisciplinar/web/templates/template.xhtml</file>
+            <file>file:/C:/Users/Felipe/Documents/NetBeansProjects/Intedisciplinar/src/java/minimax/GradeJogo.java</file>
+            <file>file:/C:/Users/Felipe/Documents/NetBeansProjects/Intedisciplinar/src/java/minimax/TicTacToe.java</file>
+            <file>file:/C:/Users/Felipe/Documents/NetBeansProjects/Intedisciplinar/src/java/minimax/Main.java</file>
         </group>
     </open-files>
 </project-private>

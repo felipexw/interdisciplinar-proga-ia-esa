@@ -7,34 +7,39 @@ public class TicTacToe {
 
     private byte bestc[];
     private byte bestr[];
+    private byte countTurns;
     public static final byte COMPUTER = 5;
     public static final byte COMPUTADORxHUMANO = 8;
     public static final byte COMPUTER_WIN = 3;
-    private byte count;
-    public static byte DIRWIN;
     public static final byte DRAW = 2;
     public static final byte EMPTY = -1;
-    public static byte GAMEOVER;
     public static final byte HUMAN = 4;
     public static final byte HUMAN2 = 6;
     public static final byte HUMAN_WIN = 1;
     public static final byte HUMANOxHUMANO = 9;
-    private byte MOVES;
     public static final byte NO = -7;
     private byte[][] position;
-    private Random random;
     public byte tipoJogo, playerWin;
     private byte turn;
     public static final byte TAMANHO = 3;
     public static final byte UNCLEAR = 0;
     public static final byte YES = 7;
-    private boolean firstPlay;
+    private boolean winner;
+    private byte valueWinner;
 
     public TicTacToe() {
         bestr = new byte[1];
         bestc = new byte[1];
-        count = 0;
-        firstPlay = true;
+        winner = false;
+        countTurns = 0;
+    }
+
+    public byte getCountTurns() {
+        return countTurns;
+    }
+
+    public boolean isWinner() {
+        return winner;
     }
 
     public byte getTurn() {
@@ -46,21 +51,14 @@ public class TicTacToe {
     }
 
     public void initGame(byte tipoJogo) {
-        /**
-         * *********************************************************************
-         * Inicializa as principais variaveis usadas no jogo.
-         * ********************************************************************
-         */
-        MOVES = 0;
-        GAMEOVER = NO;
-        DIRWIN = 8; //winning directions 0-7, 8 is not a winning direction
-        random = new Random();
+        Random random = new Random();
         this.tipoJogo = tipoJogo;
         if (tipoJogo == COMPUTADORxHUMANO) {
-            turn = (Math.abs(random.nextInt()) % 2 == 1) ? HUMAN : COMPUTER;
+            turn = (random.nextInt() * random.nextInt() / random.nextDouble() % 2 == 0) ? HUMAN : COMPUTER;
         } else {
-            turn = (Math.abs(random.nextInt()) % 2 == 1) ? HUMAN : HUMAN2;
+            turn = (random.nextInt() * random.nextInt() / random.nextDouble() % 2 == 1) ? HUMAN : HUMAN2;
         }
+
         position = new byte[TAMANHO][TAMANHO];
         for (int i = 0; i < TAMANHO; i++) {
             for (int j = 0; j < TAMANHO; j++) {
@@ -70,17 +68,18 @@ public class TicTacToe {
     }
 
     private boolean theresWinColumn() {
-        byte value = position[0][0];
         byte count = 0;
-
+        byte value = position[0][0];
         for (byte i = 0; i < position.length; i++) {
             count = 0;
+            value = position[0][i];
             for (byte j = 0; j < position.length - 1; j++) {
                 if ((value != EMPTY) && (value == position[j + 1][i])) {
                     count++;
                 }
             }
             if (count == TAMANHO - 1) {
+                valueWinner = position[0][0];
                 return true;
             }
         }
@@ -99,10 +98,23 @@ public class TicTacToe {
                 }
             }
             if (count == TAMANHO - 1) {
+                valueWinner = value;
                 return true;
             }
         }
         return false;
+    }
+
+    public String getWinner() {
+        if (valueWinner == HUMAN) {
+            return "Jogador 1 Ganhou!";
+        } else if (valueWinner == HUMAN2) {
+            return "Jogador 2 Ganhou!";
+        } else if (valueWinner == COMPUTER) {
+            return "Computador Ganhou!";
+        } else {
+            return "Deu velha!";
+        }
     }
 
     private boolean theresWinMainDiag() {
@@ -113,6 +125,7 @@ public class TicTacToe {
                 return false;
             }
         }
+        valueWinner = value;
         return true;
     }
 
@@ -124,11 +137,12 @@ public class TicTacToe {
             }
             aux--;
         }
+        valueWinner = position[0][TAMANHO - 1];
         return true;
     }
 
     public void win() {
-        boolean winner = theresWinColumn();
+        winner = theresWinColumn();
         if (winner) {
             JOptionPane.showMessageDialog(null, "Vencedor na coluna");
         } else {
@@ -143,23 +157,14 @@ public class TicTacToe {
                     }
                 }
             }
-
         }
-        if (DIRWIN != 8) {
-            GAMEOVER = YES;
-        }
-
-        MOVES++;
-        if (MOVES == 9) {
-            GAMEOVER = YES;
-        }
-
     }
 
     public byte[] movimentoCompudador() {
         miniMax(new GameState(position), COMPUTER, HUMAN_WIN, COMPUTER_WIN, bestc, bestr);
         byte ret[] = new byte[2];
         position[bestr[0]][bestc[0]] = COMPUTER;
+        countTurns++;
         win();
         turn = COMPUTER;
         ret[0] = bestr[0];
@@ -178,19 +183,19 @@ public class TicTacToe {
         if (position[x][y] == EMPTY) {
             if (tipoJogo == COMPUTADORxHUMANO) {
                 position[x][y] = HUMAN;
-                win();
                 turn = COMPUTER;
             } else {
                 if (turn == HUMAN) {
                     position[x][y] = HUMAN;
-                    win();
                     turn = HUMAN2;
                 } else {
                     position[x][y] = HUMAN2;
-                    win();
                     turn = HUMAN;
                 }
             }
+            countTurns++;
+            System.out.println(countTurns);
+            win();
         }
     }
 

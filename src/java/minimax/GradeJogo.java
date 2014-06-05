@@ -254,20 +254,10 @@ public class GradeJogo extends JPanel {
                     }
                 }
             }
-            if (game.GAMEOVER == game.YES) {
-                if (game.playerWin == game.HUMAN) {
-                    JOptionPane.showMessageDialog(null, "Jogador 1 Ganhou!",
-                            "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
-                } else if (game.playerWin == game.HUMAN2) {
-                    JOptionPane.showMessageDialog(null, "Jogador 2 Ganhou!",
-                            "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
-                } else if (game.playerWin == game.COMPUTER) {
-                    JOptionPane.showMessageDialog(null, "Computador Ganhou!",
-                            "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(null, "Deu Velha!",
-                            "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
-                }
+
+            if ((game.isWinner()) || (game.getCountTurns() == (TAMANHO * TAMANHO) - 1)) {
+                JOptionPane.showMessageDialog(null, game.getWinner(),
+                        "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
                 if (JOptionPane.showConfirmDialog(null, "Deseja Jogar Novamente?",
                         "Jogo da Velha", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {
                     limpaTela();
@@ -276,14 +266,13 @@ public class GradeJogo extends JPanel {
                 }
             }
         }
+    }
 
-        public void limpaTela() {
-            for (int i = 0; i < jbut.length; i++) {
-                for (int j = 0; j < 3; j++) {
-                    jbut[i][j].setText("");
-                }
+    public void limpaTela() {
+        for (int i = 0; i < jbut.length; i++) {
+            for (int j = 0; j < 3; j++) {
+                jbut[i][j].setText("");
             }
         }
     }
-
 }
