@@ -256,7 +256,7 @@ public class GradeJogo extends JPanel {
             }
 
             if ((game.isWinner()) || (game.getCountTurns() == (TAMANHO * TAMANHO) - 1)) {
-                JOptionPane.showMessageDialog(null, game.getWinner(),
+                JOptionPane.showMessageDialog(null, game.getWinnerMessage(),
                         "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
                 if (JOptionPane.showConfirmDialog(null, "Deseja Jogar Novamente?",
                         "Jogo da Velha", JOptionPane.YES_NO_OPTION) == JOptionPane.YES_OPTION) {

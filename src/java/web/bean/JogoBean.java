@@ -30,6 +30,7 @@ public class JogoBean implements Serializable {
         String id = "'formJogo:btn_" + index + "'";
         String str = "document.getElementById(" + id + ").innerHTML = 'X'";
         System.out.println("----------------------------JOGADOR" + str);
+
         boolean bPlayed = false;
 
         switch ((int) index) {
@@ -87,16 +88,21 @@ public class JogoBean implements Serializable {
                 }
                 break;
         }
+
         if (bPlayed) {
             requestContext.execute(str);
-            computerPlay();
+            if ((game.isWinner()) || (game.getCountTurns() == TicTacToe.TAMANHO * TicTacToe.TAMANHO)) {
+                showResults();
+            } else {
+                computerPlay();
+            }
         }
+    }
 
-        if (game.getCountTurns() == game.TAMANHO * game.TAMANHO) {
-            str = "alert('" + game.getWinner() + "')";
-            RequestContext.getCurrentInstance().execute(str);
-            initGame();
-        }
+    private void showResults() {
+        String str = "alert('" + game.getWinnerMessage() + "')";
+        RequestContext.getCurrentInstance().execute(str);
+        initGame();
     }
 
     private void computerPlay() {
@@ -132,10 +138,10 @@ public class JogoBean implements Serializable {
         System.out.println(strBuilder);
         RequestContext.getCurrentInstance().execute(strBuilder.toString());
 
-        if (game.getCountTurns() == (game.TAMANHO * game.TAMANHO) - 1) {
-            String str = "alert('" + game.getWinner() + "')";
-            RequestContext.getCurrentInstance().execute(str);
-            initGame();
+        System.out.println(game.getCountTurns());
+
+        if ((game.isWinner()) || (game.getCountTurns() == TicTacToe.TAMANHO * TicTacToe.TAMANHO)) {
+            showResults();
         }
     }
 

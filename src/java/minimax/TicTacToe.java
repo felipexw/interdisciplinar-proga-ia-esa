@@ -95,6 +95,7 @@ public class TicTacToe implements java.io.Serializable {
         byte count = 0;
 
         for (byte i = 0; i < position.length; i++) {
+            value = position[i][0];
             count = 0;
             for (byte j = 0; j < position.length - 1; j++) {
                 if (position[i][j + 1] == value && value != EMPTY) {
@@ -109,21 +110,22 @@ public class TicTacToe implements java.io.Serializable {
         return false;
     }
 
-    public String getWinner() {
-        if (valueWinner == HUMAN) {
-            return "Jogador 1 Ganhou!";
-        } else if (valueWinner == HUMAN2) {
-            return "Jogador 2 Ganhou!";
-        } else if (valueWinner == COMPUTER) {
-            return "Computador Ganhou!";
-        } else {
-            return "Deu velha!";
+    public String getWinnerMessage() {
+        if (winner) {
+            if (valueWinner == HUMAN) {
+                return "Jogador 1 Ganhou!";
+            } else if (valueWinner == HUMAN2) {
+                return "Jogador 2 Ganhou!";
+            } else if (valueWinner == COMPUTER) {
+                return "Computador Ganhou!";
+            }
         }
+        return "Deu velha";
+
     }
 
     private boolean theresWinMainDiag() {
         byte value = position[0][0];
-
         for (byte i = 0; i < position.length - 1; i++) {
             if ((value != position[i + 1][i + 1]) || (value == EMPTY)) {
                 return false;
