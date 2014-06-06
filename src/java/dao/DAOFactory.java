@@ -1,5 +1,6 @@
 package dao;
 
+import dao.core.MensagemDAO;
 import dao.core.UsuarioDAO;
 import dao.jpa.JPADAOFactory;
 
@@ -19,4 +20,6 @@ public abstract class DAOFactory {
     }
 
     public abstract UsuarioDAO getUsuarioDAO();
+
+    public abstract MensagemDAO getMensagemDAO();
 }

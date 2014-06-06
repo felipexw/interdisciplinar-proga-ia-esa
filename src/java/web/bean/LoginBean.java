@@ -10,6 +10,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 import model.Usuario;
+import org.primefaces.context.RequestContext;
 import utili.JavaMailSender;
 
 /**
@@ -54,7 +55,7 @@ public class LoginBean implements Serializable {
     }
 
     public String logout() {
-        System.out.println("ssssssssssssssssssssssssssssssssssssssssssssssssss");
+        System.out.println("123123123123123");
         try {
             FacesContext context = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
@@ -63,6 +64,7 @@ public class LoginBean implements Serializable {
         } catch (Exception e) {
             e.printStackTrace();
         }
+        RequestContext.getCurrentInstance().execute("dlgSair.hide()");
         return "index";
     }
 

@@ -2,6 +2,8 @@ package model;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
@@ -12,10 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import web.bean.datamodel.DefaultDataModel;
 import utili.GeraMD5;
 import utili.Col;
 
@@ -56,6 +58,10 @@ public class Usuario implements Serializable {
     private Endereco endereco;
     @Column(nullable = false, length = 55, unique = true)
     private String nick;
+    @OneToMany(mappedBy = "usuarioOrigem", cascade = CascadeType.ALL)
+    private List<Mensagem> mensagensOrigem;
+    @OneToMany(mappedBy = "usuarioDestino", cascade = CascadeType.ALL)
+    private List<Mensagem> mensagensDestino;
 
     public Usuario(String nome, String email, String cpf, Date dataNascimento, String senha, TipoUsuario tipo, char sexo, String nick, Endereco enderec) {
         this.nome = nome;
@@ -69,12 +75,28 @@ public class Usuario implements Serializable {
         this.nick = nick;
     }
 
+    public void setMensagensOrigem(List<Mensagem> mensagensOrigem) {
+        this.mensagensOrigem = mensagensOrigem;
+    }
+
+    public List<Mensagem> getMensagensOrigem() {
+        return mensagensOrigem;
+    }
+
     public String getNick() {
         return nick;
     }
 
     public void setNick(String nick) {
         this.nick = nick;
+    }
+
+    public void setMensagensDestino(List<Mensagem> mensagensDestino) {
+        this.mensagensDestino = mensagensDestino;
+    }
+
+    public List<Mensagem> getMensagensDestino() {
+        return mensagensDestino;
     }
 
     public Endereco getEndereco() {

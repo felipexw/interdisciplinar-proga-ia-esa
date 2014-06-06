@@ -1,11 +1,4 @@
 
-import dao.DAOFactory;
-import java.util.Date;
-import java.util.Random;
-import model.Endereco;
-import model.TipoUsuario;
-import model.Usuario;
-
 /**
  *
  * @author Felipe
@@ -13,8 +6,12 @@ import model.Usuario;
 public class Main {
 
     public static void main(String[] args) {
-//        Usuario user = new Usuario("Felipe Appio", "felipexw@gmail.com", "060.-72",
-//                new Date(), "teste", TipoUsuario.ADMINISTRADOR, 'M', "felipexw", new Endereco("Brasil", "SC", "88590-000", "Centro", "João Duwe", "Anita Garibaldi"));
+        
+//        Usuario usuarioOrigem = DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().find(4651);
+//        Usuario destino = DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().find(8451);
+//        Mensagem m = new Mensagem(usuarioOrigem, new Date(), "TESTE", destino);
+//        DAOFactory.getDAOFactory(DAOFactory.JPA).getMensagemDAO().insert(m);
+
 //        DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().insert(user);
 //        DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().update(user);
 //        System.out.println(DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().login("felipexw@gmail.com", "12"));
