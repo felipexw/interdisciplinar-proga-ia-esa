@@ -1,5 +1,6 @@
 package web.bean.datamodel;
 
+import java.io.Serializable;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.List;
@@ -9,7 +10,7 @@ import javax.faces.model.ListDataModel;
 import org.primefaces.model.SelectableDataModel;
 import utili.Col;
 
-public class DefaultDataModel<T extends Object> extends ListDataModel<Object> implements SelectableDataModel<Object> {
+public class DefaultDataModel<T extends Object> extends ListDataModel<Object> implements SelectableDataModel<Object>, Serializable {
 
     public DefaultDataModel(List<Object> objects) {
         super(objects);

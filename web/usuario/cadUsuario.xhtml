@@ -3,7 +3,8 @@
                 xmlns:p="http://primefaces.org/ui"
                 xmlns:h="http://java.sun.com/jsf/html"
                 template="/templates/template.xhtml"
-                xmlns:f="http://xmlns.jcp.org/jsf/core">
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                rendered="#{loginBean.admin}">
 
     <ui:define name="corpo">
         <h:form id="formUsuario">
@@ -61,7 +62,7 @@
 
                     <h:outputText value="Tipo:"/>
                     <p:selectOneRadio value="#{usuarioBean.usuario.tipo}"
-                                      binding="#{usuarioBean.inputTipo}">
+                                      binding="#{usuarioBean.oneRadioTipo}">
                         <f:selectItems value="#{usuarioBean.tiposUsuarios()}"/>
                     </p:selectOneRadio>
 

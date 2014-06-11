@@ -2,17 +2,29 @@ package web.bean;
 
 import dao.DAOFactory;
 import dao.core.UsuarioDAO;
+import java.io.InputStream;
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.component.UIComponent;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+import javax.faces.model.SelectItem;
 import javax.faces.validator.ValidatorException;
+import javax.servlet.http.HttpServletResponse;
 import model.TipoUsuario;
 import model.Usuario;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.data.JRBeanCollectionDataSource;
+import net.sf.jasperreports.engine.util.JRLoader;
+import org.primefaces.component.selectoneradio.SelectOneRadio;
 import web.bean.datamodel.DefaultDataModel;
+import web.validator.CPFValidator;
 import web.validator.EmailValidator;
 
 /**
@@ -26,19 +38,19 @@ public class UsuarioBean implements Serializable {
     private DefaultDataModel dataModel;
     private Usuario usuario;
     private List<Usuario> usuariosSelecionados;
-    private UIComponent inputTipo;
+    private SelectOneRadio oneRadioTipo;
 
     public UsuarioBean() {
         usuario = new Usuario();
         dataModel = new DefaultDataModel(getUsers());
     }
 
-    public UIComponent getInputTipo() {
-        return inputTipo;
+    public SelectOneRadio getOneRadioTipo() {
+        return oneRadioTipo;
     }
 
-    public void setInputTipo(UIComponent inputTipo) {
-        this.inputTipo = inputTipo;
+    public void setOneRadioTipo(SelectOneRadio oneRadioTipo) {
+        this.oneRadioTipo = oneRadioTipo;
     }
 
     public List<Usuario> getUsuariosSelecionados() {
@@ -95,25 +107,36 @@ public class UsuarioBean implements Serializable {
     }
 
     public void validateCPF(FacesContext ctx, UIComponent component, Object o) {
-        String cpf = (String) o;
-        if (cpf.equals("111.111.111-11") || cpf.equals("222.222.222-22")
-                || cpf.equals("000.000.000-00")
-                || cpf.equals("333.333.333-33")
-                || cpf.equals("444.444.444-44")
-                || cpf.equals("555.555.555-55")
-                || cpf.equals("666.666.666-66")
-                || cpf.equals("777.777.777-77")
-                || cpf.equals("888.888.888-88")
-                || cpf.equals("999.999.999-99")) {
-            throw new ValidatorException(new FacesMessage("CPF inválido. Por favor, informe outro valor."));
-        } else {
-            if (DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().listarCPF(cpf) != null) {
-                throw new ValidatorException(new FacesMessage("Este CPF já está cadastrado. Por favor, informe outro valor."));
-            }
-        }
+        new CPFValidator().validate(ctx, component, o);
     }
 
     public TipoUsuario[] tiposUsuarios() {
         return TipoUsuario.values();
     }
+
+    public void geraRelatorio() {
+        try {
+            FacesContext context = FacesContext.getCurrentInstance();
+            ExternalContext externalContext = context.getExternalContext();
+
+            InputStream stream = externalContext.getResourceAsStream("/relatorios/relatorioUsuarios.jasper");
+
+            JasperReport report = (JasperReport) JRLoader.loadObject(stream);
+
+            List<Usuario> usuarios = DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().listAll();
+
+            JRBeanCollectionDataSource dataSource = new JRBeanCollectionDataSource(usuarios);
+
+            JasperPrint printer = JasperFillManager.fillReport(stream, new HashMap<String, Object>(), dataSource);
+
+            HttpServletResponse response = (HttpServletResponse) externalContext.getResponse();
+
+            response.setContentType("application/pdf");
+            response.addHeader("Content-Disposition", "inline filename=relatorioUsuarios.pdf");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }

@@ -58,12 +58,9 @@ public class Usuario implements Serializable {
     private Endereco endereco;
     @Column(nullable = false, length = 55, unique = true)
     private String nick;
-    @OneToMany(mappedBy = "usuarioOrigem", cascade = CascadeType.ALL)
-    private List<Mensagem> mensagensOrigem;
-    @OneToMany(mappedBy = "usuarioDestino", cascade = CascadeType.ALL)
-    private List<Mensagem> mensagensDestino;
+    private Integer qtdVitorias;
 
-    public Usuario(String nome, String email, String cpf, Date dataNascimento, String senha, TipoUsuario tipo, char sexo, String nick, Endereco enderec) {
+    public Usuario(String nome, String email, String cpf, Date dataNascimento, String senha, TipoUsuario tipo, char sexo, String nick, Endereco enderec, Integer qtdVitorias) {
         this.nome = nome;
         this.email = email;
         this.cpf = cpf;
@@ -73,14 +70,15 @@ public class Usuario implements Serializable {
         this.sexo = sexo;
         endereco = enderec;
         this.nick = nick;
+        this.qtdVitorias = qtdVitorias;
     }
 
-    public void setMensagensOrigem(List<Mensagem> mensagensOrigem) {
-        this.mensagensOrigem = mensagensOrigem;
+    public Integer getQtdVitorias() {
+        return qtdVitorias;
     }
 
-    public List<Mensagem> getMensagensOrigem() {
-        return mensagensOrigem;
+    public void setQtdVitorias(Integer qtdVitorias) {
+        this.qtdVitorias = qtdVitorias;
     }
 
     public String getNick() {
@@ -89,14 +87,6 @@ public class Usuario implements Serializable {
 
     public void setNick(String nick) {
         this.nick = nick;
-    }
-
-    public void setMensagensDestino(List<Mensagem> mensagensDestino) {
-        this.mensagensDestino = mensagensDestino;
-    }
-
-    public List<Mensagem> getMensagensDestino() {
-        return mensagensDestino;
     }
 
     public Endereco getEndereco() {

@@ -9,6 +9,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
+import model.TipoUsuario;
 import model.Usuario;
 import org.primefaces.context.RequestContext;
 import utili.JavaMailSender;
@@ -22,6 +23,15 @@ import utili.JavaMailSender;
 public class LoginBean implements Serializable {
 
     private Usuario usuario;
+    private String cpf;
+
+    public String getCpf() {
+        return cpf;
+    }
+
+    public void setCpf(String cpf) {
+        this.cpf = cpf;
+    }
 
     public Usuario getUsuario() {
         return usuario;
@@ -40,9 +50,8 @@ public class LoginBean implements Serializable {
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         if (user != null) {
             session.setAttribute("User", user);
-            //Redirecionar para a página de jogo
+            this.usuario = user;
             FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
-            System.out.println("Enmtroou");
         } else {
             FacesMessage msg = new FacesMessage("Usuário ou senha inválido.");
             msg.setSeverity(FacesMessage.SEVERITY_WARN);
@@ -55,7 +64,6 @@ public class LoginBean implements Serializable {
     }
 
     public String logout() {
-        System.out.println("123123123123123");
         try {
             FacesContext context = FacesContext.getCurrentInstance();
             HttpSession session = (HttpSession) context.getExternalContext().getSession(false);
@@ -69,7 +77,6 @@ public class LoginBean implements Serializable {
     }
 
     public void restorePassword() {
-        String cpf = usuario.getCpf();
         try {
             usuario = DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().findByEmail(usuario.getEmail());
             if (usuario != null) {
@@ -111,4 +118,8 @@ public class LoginBean implements Serializable {
         return strBuilder.toString();
     }
 
+    public boolean isAdmin() {
+        Usuario usuarioSessao = getUserSession();
+        return usuarioSessao != null && usuarioSessao.getTipo() == TipoUsuario.ADMINISTRADOR;
+    }
 }

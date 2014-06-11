@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/templates/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="corpo">
+        <h:outputScript library="default/js" name="js_jogo.js"/>
+        <h:form id="formJogo">
+            <p:dialog widgetVar="dlgJogo" 
+                      header="Jogo"
+                      resizable="false" 
+                      closable="true"
+                      minimizable="false"
+                      draggable="true"
+                      modal="true"
+                      visible="true"
+                      id="dialogJogo"> 
+                <h:panelGrid columns="3">
+                    <p:commandButton
+                        id="btn_0"
+                        value=" "
+                        class="btn"
+                        actionListener="#{jogoBean.jogar(0)}"
+                        style="line-height: 200%"/>
+
+
+                    <p:commandButton
+                        id="btn_1"
+                        value=" "
+                        class="btn"
+                        actionListener="#{jogoBean.jogar(1)}"/>
+
+
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_2"
+                        actionListener="#{jogoBean.jogar(2)}"/>
+
+
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_3"
+                        actionListener="#{jogoBean.jogar(3)}"/>
+
+
+                    <p:commandButton
+                        class="btn"
+                        value=" "
+                        id="btn_4"
+                        actionListener="#{jogoBean.jogar(4)}"/>
+
+
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_5"
+                        actionListener="#{jogoBean.jogar(5)}"/>
+
+
+                    <p:commandButton
+                        class="btn"
+                        value=" "
+                        id="btn_6"
+                        actionListener="#{jogoBean.jogar(6)}"/>
+
+
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_7"
+                        actionListener="#{jogoBean.jogar(7)}"/>
+
+
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_8"
+                        actionListener="#{jogoBean.jogar(8)}"/>
+                </h:panelGrid>                
+            </p:dialog>
+        </h:form> 
+    </ui:define>
+</ui:composition>

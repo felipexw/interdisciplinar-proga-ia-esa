@@ -22,15 +22,22 @@
                               filterBy="#{usuario.nome}">
                         #{usuario.nome}
                     </p:column>
-                    <p:column headerText="E-mail"
-                              filterBy="#{usuario.email}">
-                        #{usuario.email}
+
+                    <p:column headerText="Nick"
+                              filterBy="#{usuario.nick}">
+                        #{usuario.nick}
                     </p:column>
+
+                    <p:column headerText="Vitórias">
+                        #{usuario.qtdVitorias}
+                    </p:column>
+
                     <p:column width="2%">
                         <p:commandButton icon="ui-icon-pencil"
                                          title="Editar"
                                          onclick="dialogDataTableGrupo.hide()"
-                                         update=":formUsuario"/>
+                                         update=":formUsuario"
+                                         rendered="#{loginBean.admin}"/>
                     </p:column>
                 </p:dataTable>
             </p:scrollPanel>            

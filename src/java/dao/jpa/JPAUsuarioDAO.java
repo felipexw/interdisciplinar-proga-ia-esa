@@ -2,7 +2,9 @@ package dao.jpa;
 
 import dao.core.UsuarioDAO;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import javax.persistence.EntityManager;
 import model.Usuario;
 
 /**
@@ -10,6 +12,14 @@ import model.Usuario;
  * @author Felipe
  */
 public class JPAUsuarioDAO extends JPADAO<Usuario> implements UsuarioDAO {
+
+    @Override
+    public List<Usuario> listAll() {
+        EntityManager em = getEntityManager();
+        List<Usuario> lista = em.createQuery("SELECT u FROM Usuario u ORDER BY u.qtdVitorias DESC").getResultList();
+        em.close();
+        return lista;
+    }
 
     @Override
     public Usuario findByEmail(String email) {

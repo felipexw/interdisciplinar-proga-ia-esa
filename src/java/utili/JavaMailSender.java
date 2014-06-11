@@ -27,7 +27,7 @@ public class JavaMailSender {
         connectionProperties.put("mail.smtp.socketFactory.class", "javax.net.ssl.SSLSocketFactory");
         connectionProperties.put("mail.smtp.port", "465");
         Session session = Session.getDefaultInstance(connectionProperties,
-                new Authentic(this.email, this.password));
+                new AuthenticEmail(this.email, this.password));
         Message message = new MimeMessage(session);
         message.setFrom(new InternetAddress(this.email));
         message.setRecipients(Message.RecipientType.TO, InternetAddress.parse(destinationEmail));
