@@ -1,0 +1,86 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:ui="http://java.sun.com/jsf/facelets"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://java.sun.com/jsf/html"
+                template="/templates/template.xhtml"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <ui:define name="corpo">
+        <h:outputScript library="default/js" name="js_jogo.js"/>
+        <h:form id="formJogo">
+            <p:dialog widgetVar="dlgJogo" 
+                      header="Jogo PVP"
+                      resizable="false" 
+                      closable="true"
+                      minimizable="false"
+                      draggable="true"
+                      modal="true"
+                      visible="true"
+                      id="dialogJogo"> 
+                <h:panelGrid columns="3">
+                    <p:commandButton
+                        id="btn_0"
+                        value=" "
+                        class="btn"
+                        actionListener="#{jogoPVPBean.jogar(0, loginBean.userSession)}"
+                        style="line-height: 200%"/>
+
+
+                    <p:commandButton
+                        id="btn_1"
+                        value=" "
+                        class="btn"
+                        actionListener="#{jogoComputadorBean.jogar(1, loginBean.userSession)}"/>
+
+
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_2"
+                        actionListener="#{jogoComputadorBean.jogar(2, loginBean.userSession)}"/>
+
+
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_3"
+                        actionListener="#{jogoComputadorBean.jogar(3, loginBean.userSession)}"/>
+
+
+                    <p:commandButton
+                        class="btn"
+                        value=" "
+                        id="btn_4"
+                        actionListener="#{jogoComputadorBean.jogar(4, loginBean.userSession)}"/>
+
+
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_5"
+                        actionListener="#{jogoComputadorBean.jogar(5, loginBean.userSession)}"/>
+
+
+                    <p:commandButton
+                        class="btn"
+                        value=" "
+                        id="btn_6"
+                        actionListener="#{jogoComputadorBean.jogar(6, loginBean.userSession)}"/>
+
+
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_7"
+                        actionListener="#{jogoComputadorBean.jogar(7, loginBean.userSession)}"/>
+
+
+                    <p:commandButton 
+                        class="btn"
+                        value=" "
+                        id="btn_8"
+                        actionListener="#{jogoComputadorBean.jogar(8, loginBean.userSession)}"/>
+                </h:panelGrid>                
+            </p:dialog>
+        </h:form> 
+    </ui:define>
+</ui:composition>

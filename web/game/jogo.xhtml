@@ -21,7 +21,7 @@
                         id="btn_0"
                         value=" "
                         class="btn"
-                        actionListener="#{jogoBean.jogar(0)}"
+                        actionListener="#{jogoComputadorBean.jogar(0, loginBean.userSession)}"
                         style="line-height: 200%"/>
 
 
@@ -29,56 +29,56 @@
                         id="btn_1"
                         value=" "
                         class="btn"
-                        actionListener="#{jogoBean.jogar(1)}"/>
+                        actionListener="#{jogoComputadorBean.jogar(1, loginBean.userSession)}"/>
 
 
                     <p:commandButton 
                         class="btn"
                         value=" "
                         id="btn_2"
-                        actionListener="#{jogoBean.jogar(2)}"/>
+                        actionListener="#{jogoComputadorBean.jogar(2, loginBean.userSession)}"/>
 
 
                     <p:commandButton 
                         class="btn"
                         value=" "
                         id="btn_3"
-                        actionListener="#{jogoBean.jogar(3)}"/>
+                        actionListener="#{jogoComputadorBean.jogar(3, loginBean.userSession)}"/>
 
 
                     <p:commandButton
                         class="btn"
                         value=" "
                         id="btn_4"
-                        actionListener="#{jogoBean.jogar(4)}"/>
+                        actionListener="#{jogoComputadorBean.jogar(4, loginBean.userSession)}"/>
 
 
                     <p:commandButton 
                         class="btn"
                         value=" "
                         id="btn_5"
-                        actionListener="#{jogoBean.jogar(5)}"/>
+                        actionListener="#{jogoComputadorBean.jogar(5, loginBean.userSession)}"/>
 
 
                     <p:commandButton
                         class="btn"
                         value=" "
                         id="btn_6"
-                        actionListener="#{jogoBean.jogar(6)}"/>
+                        actionListener="#{jogoComputadorBean.jogar(6, loginBean.userSession)}"/>
 
 
                     <p:commandButton 
                         class="btn"
                         value=" "
                         id="btn_7"
-                        actionListener="#{jogoBean.jogar(7)}"/>
+                        actionListener="#{jogoComputadorBean.jogar(7, loginBean.userSession)}"/>
 
 
                     <p:commandButton 
                         class="btn"
                         value=" "
                         id="btn_8"
-                        actionListener="#{jogoBean.jogar(8)}"/>
+                        actionListener="#{jogoComputadorBean.jogar(8, loginBean.userSession)}"/>
                 </h:panelGrid>                
             </p:dialog>
         </h:form> 

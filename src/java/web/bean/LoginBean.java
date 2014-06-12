@@ -21,36 +21,37 @@ import utili.JavaMailSender;
 @SessionScoped
 @ManagedBean
 public class LoginBean implements Serializable {
-
+    
     private Usuario usuario;
     private String cpf;
-
+    
     public String getCpf() {
         return cpf;
     }
-
+    
     public void setCpf(String cpf) {
         this.cpf = cpf;
     }
-
+    
     public Usuario getUsuario() {
         return usuario;
     }
-
+    
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
     }
-
+    
     public LoginBean() {
         usuario = new Usuario();
     }
-
+    
     public void login() throws IOException {
         Usuario user = DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().login(usuario.getEmail(), usuario.getSenha());
         HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
         if (user != null) {
             session.setAttribute("User", user);
             this.usuario = user;
+            ((ChatBean) FacesContext.getCurrentInstance().getExternalContext().getApplicationMap().get("chatBean")).addUsuario(usuario);
             FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
         } else {
             FacesMessage msg = new FacesMessage("Usuário ou senha inválido.");
@@ -58,8 +59,9 @@ public class LoginBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, msg);
         }
     }
-
+    
     public Usuario getUserSession() {
+        Usuario u = (Usuario) ((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false)).getAttribute("User");
         return (Usuario) ((HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(false)).getAttribute("User");
     }
 
@@ -75,7 +77,7 @@ public class LoginBean implements Serializable {
         RequestContext.getCurrentInstance().execute("dlgSair.hide()");
         return "index";
     }
-
+    
     public void restorePassword() {
         try {
             usuario = DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().findByEmail(usuario.getEmail());
@@ -102,9 +104,9 @@ public class LoginBean implements Serializable {
             FacesContext.getCurrentInstance().
                     addMessage("", new FacesMessage(FacesMessage.SEVERITY_INFO, "Uma nova senha foi encaminhada para esse e-mail.", ""));
         }
-
+        
     }
-
+    
     private String generateRandomPasswd() {
         StringBuilder strBuilder = new StringBuilder();
         Random random = new Random();
@@ -117,9 +119,8 @@ public class LoginBean implements Serializable {
         }
         return strBuilder.toString();
     }
-
+    
     public boolean isAdmin() {
-        Usuario usuarioSessao = getUserSession();
-        return usuarioSessao != null && usuarioSessao.getTipo() == TipoUsuario.ADMINISTRADOR;
+        return usuario != null && usuario.getTipo() == TipoUsuario.ADMINISTRADOR;
     }
 }

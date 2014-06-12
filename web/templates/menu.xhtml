@@ -10,18 +10,20 @@
                             url="/usuario/cadUsuario.jsf"/>
 
                 <p:menuitem value="Relatório"
-                            rendered="#{not loginBean.userSession eq null}"
-                            actionListener="#{usuarioBean.geraRelatorio()}"/>
+                            rendered="true"
+                            actionListener="true"/>
 
                 <p:menuitem value="Ranking"
-                            rendered="#{not loginBean.userSession eq null}"
+                            rendered="true"
                             actionListener="/usuario/dataTableUsuario"/>
             </p:submenu>
 
             <p:submenu label="Jogo">
-                <p:menuitem value="Jogar"
-                            rendered="#{loginBean.admin}"
-                            url="/sistema/game/jogo.jsf"/>
+                <p:menuitem value="Jogar contra o computador"
+                            url="/game/jogo.jsf"/>
+
+                <p:menuitem value="Jogar contra outro jodador"
+                            url="/game/jogoPVP.jsf"/>
 
                 <p:menuitem value="Ranking"
                             url="/game/ranking.jsf"/>

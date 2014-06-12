@@ -5,27 +5,26 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import minimax.TicTacToe;
-import model.Jogo;
+import model.Usuario;
 import org.primefaces.context.RequestContext;
 
 /**
  *
  * @author Felipe
  */
-@ViewScoped
 @ManagedBean
-public class JogoBean implements Serializable {
+@ViewScoped
+public class JogoPVPBean extends AbstractJogoBean implements Serializable {
 
-    private Jogo jogo;
-    private TicTacToe game;
+    private Boolean jogador_1;
+    private Boolean jogador_2;
 
-    public JogoBean() {
-        this.jogo = new Jogo();
-        this.game = new TicTacToe();
+    public JogoPVPBean() {
+        super();
     }
 
-    public void jogar(long index) {
+    @Override
+    public void jogar(long index, Usuario user) {
         RequestContext requestContext = RequestContext.getCurrentInstance();
         String id = "'formJogo:btn_" + index + "'";
         String str = "document.getElementById(" + id + ").innerHTML = 'X'";
@@ -88,78 +87,25 @@ public class JogoBean implements Serializable {
                 }
                 break;
         }
-
         if (bPlayed) {
-            requestContext.execute(str);
-            if ((game.isWinner()) || (game.getCountTurns() == TicTacToe.TAMANHO * TicTacToe.TAMANHO)) {
-                showResults();
-            } else {
-                computerPlay();
-            }
         }
+        requestContext.execute(str);
     }
 
-    private void showResults() {
-        String str = "alert('" + game.getWinnerMessage() + "')";
-        RequestContext.getCurrentInstance().execute(str);
-        initGame();
+    public Boolean isJogador_1() {
+        return jogador_1;
     }
 
-    private void computerPlay() {
-        StringBuilder strBuilder = new StringBuilder("document.getElementById('formJogo:btn_");
-        byte[] computer = game.movimentoComputador();
-
-        if (computer[0] == 0) {
-            if (computer[1] == 0) {
-                strBuilder.append(0);
-            } else if (computer[1] == 1) {
-                strBuilder.append(1);
-            } else {
-                strBuilder.append(2);
-            }
-        } else if (computer[0] == 1) {
-            if (computer[1] == 0) {
-                strBuilder.append(3);
-            } else if (computer[1] == 1) {
-                strBuilder.append(4);
-            } else {
-                strBuilder.append(5);
-            }
-        } else if (computer[0] == 2) {
-            if (computer[1] == 0) {
-                strBuilder.append(6);
-            } else if (computer[1] == 1) {
-                strBuilder.append(7);
-            } else {
-                strBuilder.append(8);
-            }
-        }
-        strBuilder.append("').innerHTML = 'O'");
-        System.out.println(strBuilder);
-        RequestContext.getCurrentInstance().execute(strBuilder.toString());
-
-        System.out.println(game.getCountTurns());
-
-        if ((game.isWinner()) || (game.getCountTurns() == TicTacToe.TAMANHO * TicTacToe.TAMANHO)) {
-            showResults();
-        }
+    public void setJogador_1(Boolean jogador_1) {
+        this.jogador_1 = jogador_1;
     }
 
-    private void initGame() {
-        for (byte i = 0; i < game.TAMANHO * game.TAMANHO; i++) {
-            String id = "'formJogo:btn_" + i + "'";
-            String str = "document.getElementById(" + id + ").innerHTML = ''";
-            RequestContext.getCurrentInstance().execute(str);
-        }
-        game = new TicTacToe();
+    public Boolean isJogador_2() {
+        return jogador_2;
     }
 
-    public Jogo getJogo() {
-        return jogo;
-    }
-
-    public void setJogo(Jogo jogo) {
-        this.jogo = jogo;
+    public void setJogador_2(Boolean jogador_2) {
+        this.jogador_2 = jogador_2;
     }
 
 }

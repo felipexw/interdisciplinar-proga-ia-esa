@@ -62,7 +62,7 @@
 
                     <h:outputText value="Tipo:"/>
                     <p:selectOneRadio value="#{usuarioBean.usuario.tipo}"
-                                      binding="#{usuarioBean.oneRadioTipo}">
+                                      rendered="#{loginBean.admin}">
                         <f:selectItems value="#{usuarioBean.tiposUsuarios()}"/>
                     </p:selectOneRadio>
 
