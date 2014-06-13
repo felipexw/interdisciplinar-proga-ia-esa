@@ -17,28 +17,17 @@ import javax.persistence.TemporalType;
  *
  * @author Felipe
  */
-//@Entity
 public class Jogo implements Serializable {
 
-//    @Id
-//    @GeneratedValue(generator = "gerador_sequencia", strategy = GenerationType.SEQUENCE)
     private Integer id;
-//    @Temporal(TemporalType.TIMESTAMP)
     private Date dataInicio;
-//    @Temporal(TemporalType.TIMESTAMP)
     private Date dataFim;
-//    @ManyToOne(cascade = CascadeType.PERSIST)
-//    @JoinColumn(name = "id")
-    private Usuario usuario_X;
-//    @JoinColumn(name = "id")
-//    @ManyToOne(cascade = CascadeType.PERSIST)
-    private Usuario usuario_Y;
-//    @ManyToOne(cascade = CascadeType.PERSIST)
-//    @JoinColumn(name = "id")
+
+    private Usuario jogador_1;
+
+    private Usuario jogador_2;
+
     private Usuario vencedor;
-//    @ManyToOne
-//    @Column(nullable = false)
-//    @JoinColumn(name = "id")
     private Partida partida;
 
     public Partida getPartida() {
@@ -77,24 +66,20 @@ public class Jogo implements Serializable {
         return dataFim;
     }
 
-    public void setDataFim(Date dataFim) {
-        this.dataFim = dataFim;
+    public Usuario getJogador_1() {
+        return jogador_1;
     }
 
-    public Usuario getUsuario_X() {
-        return usuario_X;
+    public void setJogador_1(Usuario jogador_1) {
+        this.jogador_1 = jogador_1;
     }
 
-    public void setUsuario_X(Usuario usuario_X) {
-        this.usuario_X = usuario_X;
+    public Usuario getJogador_2() {
+        return jogador_2;
     }
 
-    public Usuario getUsuario_Y() {
-        return usuario_Y;
-    }
-
-    public void setUsuario_Y(Usuario usuario_Y) {
-        this.usuario_Y = usuario_Y;
+    public void setJogador_2(Usuario jogador_2) {
+        this.jogador_2 = jogador_2;
     }
 
 }

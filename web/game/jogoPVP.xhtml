@@ -20,66 +20,66 @@
                     <p:commandButton
                         id="btn_0"
                         value=" "
+                        onclick="playPVP(0, 0)"
                         class="btn"
-                        actionListener="#{jogoPVPBean.jogar(0, loginBean.userSession)}"
                         style="line-height: 200%"/>
 
 
                     <p:commandButton
                         id="btn_1"
                         value=" "
-                        class="btn"
-                        actionListener="#{jogoComputadorBean.jogar(1, loginBean.userSession)}"/>
+                        onclick="playPVP(0, 1)"
+                        class="btn"/>
 
 
                     <p:commandButton 
                         class="btn"
                         value=" "
-                        id="btn_2"
-                        actionListener="#{jogoComputadorBean.jogar(2, loginBean.userSession)}"/>
+                         onclick="playPVP(0, 2)"
+                        id="btn_2"/>
 
 
                     <p:commandButton 
                         class="btn"
                         value=" "
-                        id="btn_3"
-                        actionListener="#{jogoComputadorBean.jogar(3, loginBean.userSession)}"/>
+                        onclick="playPVP(1, 0)"
+                        id="btn_3"/>
 
 
                     <p:commandButton
                         class="btn"
                         value=" "
-                        id="btn_4"
-                        actionListener="#{jogoComputadorBean.jogar(4, loginBean.userSession)}"/>
+                        onclick="playPVP(1, 1)"
+                        id="btn_4"/>
 
 
                     <p:commandButton 
                         class="btn"
                         value=" "
-                        id="btn_5"
-                        actionListener="#{jogoComputadorBean.jogar(5, loginBean.userSession)}"/>
+                        onclick="playPVP(1, 2)"
+                        id="btn_5"/>
 
 
                     <p:commandButton
                         class="btn"
                         value=" "
-                        id="btn_6"
-                        actionListener="#{jogoComputadorBean.jogar(6, loginBean.userSession)}"/>
+                        onclick="playPVP(2, 0)"
+                        id="btn_6"/>
 
 
                     <p:commandButton 
                         class="btn"
                         value=" "
-                        id="btn_7"
-                        actionListener="#{jogoComputadorBean.jogar(7, loginBean.userSession)}"/>
+                        onclick="playPVP(2, 1)"
+                        id="btn_7"/>
 
 
                     <p:commandButton 
                         class="btn"
                         value=" "
-                        id="btn_8"
-                        actionListener="#{jogoComputadorBean.jogar(8, loginBean.userSession)}"/>
-                </h:panelGrid>                
+                        onclick="playPVP(2, 2)"
+                        id="btn_8"/>
+                </h:panelGrid>                   
             </p:dialog>
         </h:form> 
     </ui:define>

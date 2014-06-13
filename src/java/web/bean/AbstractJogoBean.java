@@ -1,6 +1,5 @@
 package web.bean;
 
-import java.io.Serializable;
 import minimax.TicTacToe;
 import model.Jogo;
 import model.Usuario;

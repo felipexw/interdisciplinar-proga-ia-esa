@@ -1,47 +1,98 @@
-function checkSquart(uiComponent) {
-    debugger;
-    if (uiComponent.outerText == "") {
-        uiComponent.outerText = 'XXXXXXXXX';
-        var index = parseInt(uiComponent.id.charAt(uiComponent.id.length - 1));
-        var indexComputerPlay;
+var $webSocket;
+var $serverLocation = "ws://10.60.15.37:8080/interdisciplinar/game/";
+var 
+$index;
+var $room = 'fudenica';
+var $strId = 'formJogo:btn_';
+var $contentValue = '"X"';
+var $bPrimeiraJogada = true;
+var $bJogou = false;
+var $id;
 
-        switch (index) {
-            case 0:
-                Game.setMovimentoJogador(0, 0);
-                break;
+function isAvailable() {
+    return document.getElementById($strId + $index).value === " ";
+}
 
-            case 1:
-                Game.setMovimentoJogador(0, 1);
-                break;
+function writeMessage(param) {
+    var data = JSON.parse(param);
+    console.log(param);
 
-            case 2:
-                Game.setMovimentoJogador(0, 2);
-                break;
+    if (data.id == $id)
+        $bJogou = true;
+    else
+        $bJogou = false;
+    
+    if ($bPrimeiraJogada) {
+        $bPrimeiraJogada = false;
+    } else {
+        $contentValue = ($contentValue == '"X"' ? '"O"' : '"X"');
+    }
+    document.getElementById($strId + data.buttonIndex).value = $contentValue;
+}
 
-            case 3:
-                Game.setMovimentoJogador(1, 0);
-                break;
-
-            case 4:
-                Game.setMovimentoJogador(1, 1);
-                break;
-
-            case 5:
-                Game.setMovimentoJogador(1, 2);
-                break;
-
-            case 6:
-                Game.setMovimentoJogador(2, 0);
-                break;
-
-            case 7:
-                Game.setMovimentoJogador(2, 1);
-                break;
-
-            case 8:
-                Game.setMovimentoJogador(2, 2);
-                break;
-        }
-        indexComputerPlay = Game.movimentoCompudador();
+function calculateIndex(i, j) {
+    switch (i) {
+        case 0:
+            {
+                if (j == 0)
+                    $index = '0';
+                else
+                if (j == 1)
+                    $index = '1';
+                else
+                    $index = '2';
+            }
+            break;
+        case 1:
+            {
+                if (j == 0)
+                    $index = '3';
+                else
+                if (j == 1)
+                    $index = '4';
+                else
+                    $index = '5';
+            }
+            break;
+        case 2:
+            {
+                if (j == 0)
+                    $index = '6';
+                else
+                if (j == 1)
+                    $index = '7';
+                else
+                    $index = '8';
+            }
+            break;
     }
 }
+
+
+function playPVP(i, j) {
+    calculateIndex(i, j);
+    if (isAvailable()) {
+        if (!$bJogou) {
+            var msg = '{"i":' + i + ', "j":'
+                    + j + ', "id":' + $id + ',"buttonIndex": ' + $index + ',"contentValue": ' + $contentValue + '    }';
+            $webSocket.send(msg);
+        } else {
+            alert("Não é a sua vez de jogar!");
+        }
+    } else {
+        alert("Jogada inválida!");
+    }
+}
+
+window.onload = function() {
+    console.log("window.onload = function() {");
+    $webSocket = new WebSocket($serverLocation + $room);
+    $webSocket.onmessage = function(e) {
+        writeMessage(e.data);
+    }
+    $webSocket.onopen = function(e) {
+        console.log('ABriu conexão websocket');
+    }
+    $id = parseInt(Math.random() * Math.random() * 12345 / Math.random());
+}
+

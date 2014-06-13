@@ -1,5 +1,6 @@
 package web.bean;
 
+import dao.DAOFactory;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.bean.ApplicationScoped;
@@ -18,7 +19,7 @@ public class ChatBean {
     private List<Usuario> usuariosOnline;
 
     public ChatBean() {
-        usuariosOnline = Collections.synchronizedList(new ArrayList<>());
+        usuariosOnline = Collections.synchronizedList(new ArrayList<>(DAOFactory.getDAOFactory(DAOFactory.JPA).getUsuarioDAO().listAll()));
     }
 
     public void addUsuario(Usuario u) {

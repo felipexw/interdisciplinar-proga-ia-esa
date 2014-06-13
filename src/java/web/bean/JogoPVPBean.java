@@ -1,10 +1,12 @@
 package web.bean;
 
 import java.io.Serializable;
+import java.util.Random;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import minimax.TicTacToe;
 import model.Usuario;
 import org.primefaces.context.RequestContext;
 
@@ -16,18 +18,24 @@ import org.primefaces.context.RequestContext;
 @ViewScoped
 public class JogoPVPBean extends AbstractJogoBean implements Serializable {
 
-    private Boolean jogador_1;
-    private Boolean jogador_2;
+    private String label;
+    private String player;
 
     public JogoPVPBean() {
         super();
+        label = "'X'";
+    }
+
+    private void calcLabel() {
+        label = (label.equals("'X'") ? "'O'" : "'X'");
     }
 
     @Override
     public void jogar(long index, Usuario user) {
         RequestContext requestContext = RequestContext.getCurrentInstance();
         String id = "'formJogo:btn_" + index + "'";
-        String str = "document.getElementById(" + id + ").innerHTML = 'X'";
+
+        String str = "document.getElementById(" + id + ").innerHTML = " + label;
         System.out.println("----------------------------JOGADOR" + str);
 
         boolean bPlayed = false;
@@ -88,24 +96,22 @@ public class JogoPVPBean extends AbstractJogoBean implements Serializable {
                 break;
         }
         if (bPlayed) {
+            requestContext.execute(str);
+            if ((game.isWinner()) || (game.getCountTurns() == TicTacToe.TAMANHO * TicTacToe.TAMANHO)) {
+                showResults();
+            }
+            calcLabel();
         }
-        requestContext.execute(str);
     }
 
-    public Boolean isJogador_1() {
-        return jogador_1;
-    }
-
-    public void setJogador_1(Boolean jogador_1) {
-        this.jogador_1 = jogador_1;
-    }
-
-    public Boolean isJogador_2() {
-        return jogador_2;
-    }
-
-    public void setJogador_2(Boolean jogador_2) {
-        this.jogador_2 = jogador_2;
+    public void generateRandomPlayer() {
+        Random random = new Random();
+        int resto = (random.nextInt() * random.nextInt() / random.nextInt()) % 2;
+        if (resto == 0) {
+            player = "jogador_1";
+        } else {
+            player = "jogador_2";
+        }
     }
 
 }
