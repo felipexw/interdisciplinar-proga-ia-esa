@@ -1,2 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Context antiJARLocking="true" path="/Intedisciplinar"/>
+<Context antiJARLocking="true" path="/interdisciplinar">
+    <Loader delegate="true"/>
+</Context>

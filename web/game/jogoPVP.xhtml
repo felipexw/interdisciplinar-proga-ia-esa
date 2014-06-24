@@ -5,7 +5,8 @@
                 template="/templates/template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="corpo">
-        <h:outputScript library="default/js" name="js_jogo.js"/>
+        <script type="text/javascript" src="../jquery/jquery.atmosphere-min.js"></script>
+        <h:outputScript library="default/js" name="js_jogo.js"/>        
         <h:form id="formJogo">
             <p:dialog widgetVar="dlgJogo" 
                       header="Jogo PVP"
@@ -35,7 +36,7 @@
                     <p:commandButton 
                         class="btn"
                         value=" "
-                         onclick="playPVP(0, 2)"
+                        onclick="playPVP(0, 2)"
                         id="btn_2"/>
 
 
