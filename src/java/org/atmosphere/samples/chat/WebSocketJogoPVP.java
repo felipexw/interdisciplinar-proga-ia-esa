@@ -7,7 +7,6 @@ package org.atmosphere.samples.chat;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import org.atmosphere.config.service.Message;
 import org.atmosphere.config.service.WebSocketHandlerService;
 import org.atmosphere.cpr.AtmosphereRequest;
 import org.atmosphere.cpr.AtmosphereResource;
@@ -28,11 +27,11 @@ import web.bean.JogoPVPBean;
  *
  * @author Jeanfrancois Arcand
  */
-@WebSocketHandlerService(path = "/chat", broadcaster = SimpleBroadcaster.class,
+@WebSocketHandlerService(path = "/jogo", broadcaster = SimpleBroadcaster.class,
         atmosphereConfig = {"org.atmosphere.websocket.WebSocketProtocol=org.atmosphere.websocket.protocol.StreamingHttpProtocol"})
-public class WebSocketChat extends WebSocketStreamingHandlerAdapter {
+public class WebSocketJogoPVP extends WebSocketStreamingHandlerAdapter {
 
-    private final Logger logger = LoggerFactory.getLogger(WebSocketChat.class);
+    private final Logger logger = LoggerFactory.getLogger(WebSocketJogoPVP.class);
     private final ObjectMapper mapper = new ObjectMapper();
 
     @Override
@@ -56,14 +55,13 @@ public class WebSocketChat extends WebSocketStreamingHandlerAdapter {
         AtmosphereRequest request = resource.getRequest();
 //        JogoPVPBean pvpBean = (JogoPVPBean) request.getSession().getAttribute("jogoPVPBean");
         //todo encoder e decoder
-        
-        webSocket.broadcast(mapper.writeValueAsString(mapper.readValue(new BufferedReader(reader).readLine(), Data.class)));
+
+        webSocket.broadcast(mapper.writeValueAsString(mapper.readValue(new BufferedReader(reader).readLine(), Jogada.class)));
     }
 
     @Override
     public void onTextMessage(WebSocket webSocket, String data) throws IOException {
-        System.out.println(data);
-        super.onTextMessage(webSocket, data); //To change body of generated methods, choose Tools | Templates.
+        super.onTextMessage(webSocket, data);
     }
 
 }

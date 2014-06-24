@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Random;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import minimax.TicTacToe;
@@ -15,7 +16,7 @@ import org.primefaces.context.RequestContext;
  * @author Felipe
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class JogoPVPBean extends AbstractJogoBean implements Serializable {
 
     private String label;

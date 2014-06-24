@@ -1,19 +1,40 @@
-$(function() {
-    "use strict";
-    console.log("hsadfasd");
-    var $webSocket;
-    var $serverLocation = "ws:localhost:8080/interdisciplinar/chat";
-    var $index;
-    var $room = 'fudenica';
+this.x = $(function() {
+    debugger;
+    var $serverLocation = "ws:localhost:8080/interdisciplinar/jogo";
+    var $index = 0;
     var $strId = 'formJogo:btn_';
     var $contentValue = '"X"';
     var $bPrimeiraJogada = true;
     var $bJogou = false;
-    var $id;
+    var $id = 0;
     var socket = $.atmosphere;
+    
+    var cont = 0;
+    for (var i = 0; i < 3; i++) {
+        for (var j = 0; j < 3; j++) {
+            var x = document.getElementById($strId + '' + cont);
+            cont++;
+            x.onclick = function() {
+                calculateIndex($index, j);
+                if (isAvailable()) {
+                    if (!$bJogou) {
+                        var msg = '{"i":' + i + ', "j":'
+                                + j + ', "id":' + $id + ',"buttonIndex": ' + $index + ',"contentValue": ' + $contentValue + '}';
+                        subSocket.push(jQuery.stringifyJSON(msg));
+                    } else {
+                        alert("Não é a sua vez de jogar!");
+                    }
+                } else {
+                    alert("Jogada inválida!");
+                }
+            };
+        }
+    }
+
+
 
     // We are now ready to cut the request
-    var request = {url: $serverLocation,
+    request = {url: $serverLocation,
         contentType: "application/json",
         transport: 'websocket'};
 
@@ -22,6 +43,7 @@ $(function() {
     };
 
     request.onMessage = function(response) {
+        console.log("request.onMessage = function(response) {");
         var message = response.responseBody;
         try {
             var json = jQuery.parseJSON(message);
@@ -38,8 +60,7 @@ $(function() {
     request.onError = function(response) {
         console.log("request.onError = function(response)");
     };
-
-    debugger;
+    
     var subSocket = socket.subscribe(request);
 
     function addMessage(author, message, color, datetime) {
@@ -70,6 +91,7 @@ $(function() {
     }
 
     function calculateIndex(i, j) {
+        console.log("function calculateIndex");
         switch (i) {
             case 0:
                 {
@@ -106,23 +128,11 @@ $(function() {
                 break;
         }
     }
+}
+);
 
 
-    function playPVP(i, j) {
-        calculateIndex(i, j);
-        if (isAvailable()) {
-            if (!$bJogou) {
-                var msg = '{"i":' + i + ', "j":'
-                        + j + ', "id":' + $id + ',"buttonIndex": ' + $index + ',"contentValue": ' + $contentValue + '    }';
-                $webSocket.send(msg);
-            } else {
-                alert("Não é a sua vez de jogar!");
-            }
-        } else {
-            alert("Jogada inválida!");
-        }
-    }
-});
+
 
 
 
