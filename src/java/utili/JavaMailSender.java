@@ -34,7 +34,6 @@ public class JavaMailSender {
         message.setSubject("Solicitação de Nova Senha");
         message.setText("Sua nova senha é: " + destinationPassword);
         Transport.send(message);
-        System.out.println("Done!!");
     }
 
 }

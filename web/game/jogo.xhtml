@@ -5,9 +5,6 @@
                 template="/templates/template.xhtml"
                 xmlns:f="http://xmlns.jcp.org/jsf/core">
     <ui:define name="corpo">
-        <h:outputScript library="default/js" name="jquery-2.0.3-min.js"/>
-        <h:outputScript library="default/js" name="jquery,atmosphere.min.js"/>
-        <h:outputScript library="default/js" name="js_jogo.js"/>
         <h:form id="formJogo">
             <p:dialog widgetVar="dlgJogo" 
                       header="Jogo"
@@ -39,7 +36,6 @@
                         value=" "
                         id="btn_2"
                         actionListener="#{jogoComputadorBean.jogar(2, loginBean.userSession)}"/>
-
 
                     <p:commandButton 
                         class="btn"

@@ -13,8 +13,8 @@
                   draggable="false"
                   modal="true"
                   id="caixalogin"
-                  rendered="false"
-                  visible="false">
+                  rendered="#{loginBean.userSession eq null}"
+                  visible="#{loginBean.userSession eq null}">
 
             <h:form id="frmLogin">
                 <h:panelGrid columns="2" id="panelLoginUser">

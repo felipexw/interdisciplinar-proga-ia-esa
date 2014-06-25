@@ -7,7 +7,6 @@ package org.atmosphere.samples.chat;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.Reader;
-import org.atmosphere.config.service.Message;
 import org.atmosphere.config.service.WebSocketHandlerService;
 import org.atmosphere.cpr.AtmosphereRequest;
 import org.atmosphere.cpr.AtmosphereResource;

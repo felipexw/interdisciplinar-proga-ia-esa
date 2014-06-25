@@ -51,7 +51,7 @@ public class LoginBean implements Serializable {
         if (user != null) {
             session.setAttribute("User", user);
             this.usuario = user;
-            ((ChatBean) FacesContext.getCurrentInstance().getExternalContext().getApplicationMap().get("chatBean")).addUsuario(usuario);
+//            ((ChatBean) FacesContext.getCurrentInstance().getExternalContext().getApplicationMap().get("chatBean")).addUsuario(usuario);
             FacesContext.getCurrentInstance().getExternalContext().redirect("index.jsf");
         } else {
             FacesMessage msg = new FacesMessage("Usuário ou senha inválido.");

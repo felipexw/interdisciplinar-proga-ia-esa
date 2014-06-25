@@ -98,7 +98,7 @@ public class JogoComputadorBean extends AbstractJogoBean implements Serializable
 
     private void computerPlay() {
         StringBuilder strBuilder = new StringBuilder("document.getElementById('formJogo:btn_");
-        byte[] computer = game.movimentoComputador();
+        byte[] computer = game.movimentoComputador((byte) 5);
 
         if (computer[0] == 0) {
             if (computer[1] == 0) {
@@ -128,8 +128,6 @@ public class JogoComputadorBean extends AbstractJogoBean implements Serializable
         strBuilder.append("').innerHTML = 'O'");
         System.out.println(strBuilder);
         RequestContext.getCurrentInstance().execute(strBuilder.toString());
-
-        System.out.println(game.getCountTurns());
 
         if ((game.isWinner()) || (game.getCountTurns() == TicTacToe.TAMANHO * TicTacToe.TAMANHO)) {
             showResults();

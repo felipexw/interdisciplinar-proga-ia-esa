@@ -24,6 +24,10 @@ public class TicTacToe implements java.io.Serializable {
     private boolean winner;
     private byte valueWinner;
 
+    public byte getWinner() {
+        return valueWinner;
+    }
+
     public TicTacToe() {
         initGame();
         bestr = new byte[1];
@@ -51,7 +55,10 @@ public class TicTacToe implements java.io.Serializable {
     public void initGame(byte tipoJogo) {
         this.tipoJogo = tipoJogo;
         turn = HUMAN;
+        initPosition();
+    }
 
+    private void initPosition() {
         position = new byte[TAMANHO][TAMANHO];
         for (int i = 0; i < TAMANHO; i++) {
             for (int j = 0; j < TAMANHO; j++) {
@@ -63,12 +70,7 @@ public class TicTacToe implements java.io.Serializable {
     public void initGame() {
         turn = HUMAN;
         tipoJogo = COMPUTADORxHUMANO;
-        position = new byte[TAMANHO][TAMANHO];
-        for (int i = 0; i < TAMANHO; i++) {
-            for (int j = 0; j < TAMANHO; j++) {
-                position[i][j] = EMPTY;
-            }
-        }
+        initPosition();
     }
 
     private boolean theresWinColumn() {
@@ -166,7 +168,7 @@ public class TicTacToe implements java.io.Serializable {
         }
     }
 
-    public byte[] movimentoComputador() {
+    public byte[] movimentoComputador(byte profundidade) {
         miniMax(new GameState(position), COMPUTER, HUMAN_WIN, COMPUTER_WIN, bestc, bestr);
         byte ret[] = new byte[2];
         position[bestr[0]][bestc[0]] = COMPUTER;

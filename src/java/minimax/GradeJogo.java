@@ -1,6 +1,7 @@
 package minimax;
 
 import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -27,50 +28,50 @@ public class GradeJogo extends JPanel {
     }
 
     private void setup() {
-//        setLayout(new GridLayout(TAMANHO, TAMANHO, 5, 5));
-//        setFonte("Arial", Font.BOLD, 80);
-//
-//        jbut = new JButton[TAMANHO][TAMANHO];
-//        for (byte i = 0; i < TAMANHO; i++) {
-//            for (byte j = 0; j < TAMANHO; j++) {
-//                jbut[i][j] = new JButton();
-//                jbut[i][j].setFont(getFonte());
-//                jbut[i][j].addActionListener(new ControlaJogo());
-//                add(jbut[i][j]);
-//            }
-//        }
-//
-//        Object[] tiposJogo = {"Computador Versus Humano",
-//            "Humano Versus Humano"};
-//
-//        Object escolha = JOptionPane.showInputDialog(null,
-//                "Escolha a Forma do Jogo", "Jogo da Velha",
-//                JOptionPane.INFORMATION_MESSAGE, null, tiposJogo, tiposJogo[0]);
-//
-//        if (escolha != null) {
-//            if (escolha.equals(tiposJogo[0])) {
-//                tipoJogoEscolhido = game.COMPUTADORxHUMANO;
-//            } else {
-//                tipoJogoEscolhido = game.HUMANOxHUMANO;
-//            }
-//        }
+        setLayout(new GridLayout(TAMANHO, TAMANHO, 5, 5));
+        setFonte("Arial", Font.BOLD, 80);
+
+        jbut = new JButton[TAMANHO][TAMANHO];
+        for (byte i = 0; i < TAMANHO; i++) {
+            for (byte j = 0; j < TAMANHO; j++) {
+                jbut[i][j] = new JButton();
+                jbut[i][j].setFont(getFonte());
+                jbut[i][j].addActionListener(new ControlaJogo());
+                add(jbut[i][j]);
+            }
+        }
+
+        Object[] tiposJogo = {"Computador Versus Humano",
+            "Humano Versus Humano"};
+
+        Object escolha = JOptionPane.showInputDialog(null,
+                "Escolha a Forma do Jogo", "Jogo da Velha",
+                JOptionPane.INFORMATION_MESSAGE, null, tiposJogo, tiposJogo[0]);
+
+        if (escolha != null) {
+            if (escolha.equals(tiposJogo[0])) {
+                tipoJogoEscolhido = game.COMPUTADORxHUMANO;
+            } else {
+                tipoJogoEscolhido = game.HUMANOxHUMANO;
+            }
+        }
         this.init();
     }
 
     public void init() {
-//        game.initGame(tipoJogoEscolhido);
-//        if (game.getTurn() == game.COMPUTER) {
-//            JOptionPane.showMessageDialog(null, "Computador Começa!",
-//                    "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
-//            byte[] ret = game.movimentoCompudador();
-//            jbut[ret[0]][ret[1]].setText("O");
-//        } else if (game.getTurn() == game.HUMAN) {
-//            JOptionPane.showMessageDialog(null, "Jogador1 Come�a!",
-//                    "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
-//        } else {
-//            JOptionPane.showMessageDialog(null, "Jogador2 Come�a!",
-//                    "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
-//        }
+        game.initGame(tipoJogoEscolhido);
+        if (game.getTurn() == game.COMPUTER) {
+            JOptionPane.showMessageDialog(null, "Computador Começa!",
+                    "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
+            byte[] ret = game.movimentoComputador((byte) 5);
+            jbut[ret[0]][ret[1]].setText("O");
+        } else if (game.getTurn() == game.HUMAN) {
+            JOptionPane.showMessageDialog(null, "Jogador1 Come�a!",
+                    "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(null, "Jogador2 Come�a!",
+                    "Jogo da Velha", JOptionPane.INFORMATION_MESSAGE);
+        }
     }
 
     public Font getFonte() {
@@ -100,7 +101,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[0][0].setText("X");
-                        ret = game.movimentoComputador();
+                        ret = game.movimentoComputador((byte) 5);
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -118,7 +119,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[0][1].setText("X");
-                        ret = game.movimentoComputador();
+                        ret = game.movimentoComputador((byte) 5);
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -136,7 +137,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[0][2].setText("X");
-                        ret = game.movimentoComputador();
+                        ret = game.movimentoComputador((byte) 5);
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -154,7 +155,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[1][0].setText("X");
-                        ret = game.movimentoComputador();
+                        ret = game.movimentoComputador((byte) 5);
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -172,9 +173,10 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[1][1].setText("X");
-                        ret = game.movimentoComputador();
+                        ret = game.movimentoComputador((byte) 5);
                         jbut[ret[0]][ret[1]].setText("O");
                     }
+
                 }
             } else if (e.getSource() == jbut[1][2]) {
                 if (game.getPosition()[1][2] != game.EMPTY) {
@@ -190,7 +192,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[1][2].setText("X");
-                        ret = game.movimentoComputador();
+                        ret = game.movimentoComputador((byte) 5);
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -208,7 +210,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[2][0].setText("X");
-                        ret = game.movimentoComputador();
+                        ret = game.movimentoComputador((byte) 5);
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -226,7 +228,7 @@ public class GradeJogo extends JPanel {
                         }
                     } else {
                         jbut[2][1].setText("X");
-                        ret = game.movimentoComputador();
+                        ret = game.movimentoComputador((byte) 5);
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }
@@ -243,12 +245,12 @@ public class GradeJogo extends JPanel {
                             jbut[2][2].setText("O");
                         } else {
                             jbut[2][2].setText("X");
-                            ret = game.movimentoComputador();
+                            ret = game.movimentoComputador((byte) 5);
                             jbut[ret[0]][ret[1]].setText("O");
                         }
                     } else {
                         jbut[2][2].setText("X");
-                        ret = game.movimentoComputador();
+                        ret = game.movimentoComputador((byte) 5);
                         jbut[ret[0]][ret[1]].setText("O");
                     }
                 }

@@ -31,14 +31,6 @@
                     <p:column headerText="Vitórias">
                         #{usuario.qtdVitorias}
                     </p:column>
-
-                    <p:column width="2%">
-                        <p:commandButton icon="ui-icon-pencil"
-                                         title="Editar"
-                                         onclick="dialogDataTableGrupo.hide()"
-                                         update=":formUsuario"
-                                         rendered="#{loginBean.admin}"/>
-                    </p:column>
                 </p:dataTable>
             </p:scrollPanel>            
         </p:dialog>
